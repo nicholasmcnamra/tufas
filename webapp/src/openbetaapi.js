@@ -1,4 +1,4 @@
-let searchArea = "Haycock";
+let searchArea = "The Gunks";
 
 let query = ` query GetGunks($searchArea: String!)
 {  areas(filter: {area_name: {match: $searchArea}}) {
@@ -19,25 +19,6 @@ let query = ` query GetGunks($searchArea: String!)
     }
 
   }}`;
-
-
-// async function GetCharacters() {
-
-//     let results = await fetch('https://api.openbeta.io/', {
-    
-//         method: 'POST',
-    
-//         headers: {"Content-Type": "application/json"},
-    
-//         body: JSON.stringify({
-//             query,
-//             variables: {searchArea},
-//         })
-//     })
-    
-//     let characters = await results.json();
-//     return characters.data.areas
-//     }
 
 
 const url = 'https://api.openbeta.io/';
@@ -72,4 +53,3 @@ await FetchAPI();
 
 
 export default FetchAPI
-
