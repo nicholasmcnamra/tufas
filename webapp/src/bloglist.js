@@ -1,17 +1,18 @@
-const BlogList = ( {blogs, title}) => {
+import FetchAPI from "./openbetaapi";
+
+const AreaList = ( {areas, title}) => {
 
 
     return (
-        <div className="blog-list">
+        <div className="area-list">
             <h2>{title}</h2>
-            {blogs.map((blog) => (
-                <div className="blog-preview" key ={blog.id}>
-                    <h2>{ blog.title }</h2>
-                    <p>Written by: { blog.author }</p>
+            {areas.map((area) => (
+                <div className="area-preview" key ={area.id}>
+                    <h2>{ area.title }</h2>
                 </div>
             ))}
         </div>
     )
 }
 
-export default BlogList;
+export default AreaList;

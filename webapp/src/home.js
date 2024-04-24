@@ -1,26 +1,23 @@
 import { useState } from "react";
-import BlogList from './bloglist';
-import GetCharacters from "./openbetaapi";
+import AreaList from './bloglist';
+import FetchAPI from "./openbetaapi";
+
+const results = await FetchAPI();
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-        { title: 'My new webstite', body: 'lorem ipsum...', author: 'Fitzgerald', id: 1 },
-        { title: 'Welcome party', body: 'lorem ipsum...', author: 'Hemingway', id: 2 },
-        { title: 'Web development top tips', body: 'lorem ipsum...', author: 'Man Ray', id: 3 }
-
+    const [areas, setAreas] = useState([
+        { title: results.data.areas[0].area_name },
     ])
 
-    console.log(GetCharacters());
 
     return ( 
         <div className="home">
-            <BlogList blogs={ blogs } title="All Blogs" />
-            <BlogList blogs={ blogs.filter((blog) => blog.author === 'Hemingway') } title="Hemingway's Blogs" />
+            <AreaList areas={ areas } title="Area" />
         </div>
      );
     }
 
-        
+    console.log(results);
  
 export default Home;
 

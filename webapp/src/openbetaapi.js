@@ -1,4 +1,4 @@
-let searchArea = "Gunks";
+let searchArea = "Haycock";
 
 let query = ` query GetGunks($searchArea: String!)
 {  areas(filter: {area_name: {match: $searchArea}}) {
@@ -21,24 +21,55 @@ let query = ` query GetGunks($searchArea: String!)
   }}`;
 
 
-async function GetCharacters() {
+// async function GetCharacters() {
 
-    let results = await fetch('https://api.openbeta.io/', {
+//     let results = await fetch('https://api.openbeta.io/', {
     
-        method: 'POST',
+//         method: 'POST',
     
-        headers: {"Content-Type": "application/json"},
+//         headers: {"Content-Type": "application/json"},
     
-        body: JSON.stringify({
-            query,
-            variables: {searchArea},
-        })
-    })
+//         body: JSON.stringify({
+//             query,
+//             variables: {searchArea},
+//         })
+//     })
     
-    let characters = await results.json();
-    return characters.data.areas
-    }
+//     let characters = await results.json();
+//     return characters.data.areas
+//     }
 
 
-export default GetCharacters
+const url = 'https://api.openbeta.io/';
+
+const options = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    query,
+    variables: {searchArea}
+  })
+};
+
+const FetchAPI = async () => {
+  try {
+
+    const result = await fetch(
+      url,
+      options
+    );
+
+    const data = await result.json();
+    return data;
+
+  } catch (err) {
+    console.info(err)
+  }
+}
+await FetchAPI();
+
+
+export default FetchAPI
 
