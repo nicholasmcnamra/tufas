@@ -1,8 +1,20 @@
 import { useState, useEffect } from "react";
+import FetchAPI from "./openbetaapi";
 
-function Search() {
+const Search = () => {
+    let [searchArea, setSearchArea] = useState("");
+    const handleChange = (e) => {
+        e.preventDefault();
+        setSearchArea(e.target.value);
+      };
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        // handle search logic here
+        console.log(`Searching for ${searchArea}...`);
+      }
+
     useEffect(() => {
-    let searchArea = "Gunks";
     let query = ` query GetGunks($searchArea: String!)
     {  areas(filter: {area_name: {match: $searchArea}}) {
         area_name
@@ -34,19 +46,31 @@ function Search() {
         variables: {searchArea}
     })
     };
-        fetch(url)
-        .then(result => result.json())
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
-    }, [])
+
+const FetchAPI = async () => {
+  try {
+
+    const result = await fetch(
+      url,
+      options
+    );
+
+    const data = await result.json();
+    return data;
+
+  } catch (err) {
+    console.info(err)
+  }
+}}, [])
 
     return (
         <div>
             <div className="search">
-                <input type="text" className="text" placeholder="Search"/>
+                <form method="post" onSubmit={handleSubmit}></form>
+                <input type="text" value={searchArea} onChange={handleChange} />
+                {console.log(FetchAPI(searchArea))}
             </div>
         </div>
     )
 }
-
 export default Search

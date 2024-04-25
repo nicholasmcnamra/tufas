@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FetchLocalAPI from './fetchlocalapi';
 
 const Login= () => {
   const [username, setUsername] = useState('');
@@ -11,7 +12,8 @@ const Login= () => {
       alert('Please fill in both fields.');
       return;
     }
-
+    
+    FetchLocalAPI();
     console.log(username,password)
   };
 

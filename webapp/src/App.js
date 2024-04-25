@@ -5,6 +5,8 @@ import Home from './home';
 import {  BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import ClimbingAreas from './ClimbingAreas';
 import Login from './Login';
+import Search from './Search';
+import Header from './header';
 
 function App() {
   const title = "welcome to the new block";
@@ -17,7 +19,8 @@ function App() {
       <div className="content">
         <Switch>
         <Route exact path= "/">
-            <Home />
+          <Search />
+        <Header />
           </Route>
           <Route exact path="/login">
           <Login />
