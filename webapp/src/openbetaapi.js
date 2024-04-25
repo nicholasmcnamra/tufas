@@ -21,7 +21,7 @@ let query = ` query GetGunks($searchArea: String!)
   }}`;
 
 
-const url = 'https://api.openbeta.io/';
+const url = 'https://api.openbeta.io';
 
 const options = {
   method: 'POST',
@@ -50,6 +50,8 @@ const FetchAPI = async () => {
   }
 }
 await FetchAPI();
+
+
 
 
 export default FetchAPI

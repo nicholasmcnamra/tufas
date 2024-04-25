@@ -36,6 +36,8 @@
 }
 
 .area-preview {
+  display: inline-flex;
+  list-style-type: none;
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
@@ -49,4 +51,37 @@
   font-size: 20px;
   color: #000000;
   margin-bottom: 8px;
+}
+
+.login {
+  display: inline-block;
+  margin: 0px;
+}
+
+.username {
+  display: inline-flex;
+  padding: 10px 16px;
+  margin: 20px 0;
+}
+.usernamebox {
+  display: inline-flex;
+  padding: 10px 0px 10px 30px;
+  margin: 20px 0;
+}
+
+.password {
+  display: inline-flex;
+  padding: 10px 16px;
+  margin: 20px 0;
+}
+.passwordbox {
+  display: inline-flex;
+  padding: 10px 0px 10px 30px;
+  margin: 20px 0;
+}
+
+.loginbutton {
+  display: inline-flex;
+  padding: 10px 16px;
+  margin: 20px 0;
 }

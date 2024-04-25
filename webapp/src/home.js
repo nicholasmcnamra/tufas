@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AreaList from './bloglist';
+import AreaList from './arealist';
 import FetchAPI from "./openbetaapi";
 
 const results = await FetchAPI();
@@ -10,14 +10,14 @@ const Home = () => {
     ])
 
     const listItems = results.data.areas[0].children.map((climbs) =>
-    <li>{climbs.area_name}</li>
+    <li className="area-preview">{climbs.area_name}</li>
     );
 
 
     return ( 
         <div className="home">
             <AreaList areas={ areas } title="Area" />
-            <li>{listItems}</li>
+            {listItems}
         </div>
      );
     }
