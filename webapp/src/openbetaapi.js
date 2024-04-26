@@ -21,7 +21,7 @@ let query = ` query GetGunks($searchArea: String!)
   }}`;
 
 
-const url = 'https://api.openbeta.io';
+const url = 'https://stg-api.openbeta.io';
 
 // const options = {
 //   method: 'POST',
