@@ -3,19 +3,19 @@ import FetchAPI from "./openbetaapi";
 
 const Search = () => {
     let [searchArea, setSearchArea] = useState("");
-    const handleClick = (value) => {
+    const handleClick = (v) => {
         // e.preventDefault();
-        setSearchArea(value);
+        setSearchArea(v);
         // FetchAPI(value);
-        console.log(FetchAPI(value));
-        console.log(value);
+        console.log(FetchAPI(v));
+        console.log(v);
       };
-      let title = document.getElementById('title').value;
+
     return (
         <div>
             <div className="search">
             <input  id='title'></input>
-            <button onClick={() => handleClick(title)}>Click me!</button>
+            <button onClick={() => handleClick(document.getElementById('title').value)}>Click me!</button>
             </div>
         </div>
     )

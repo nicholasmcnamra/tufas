@@ -59,6 +59,4 @@ const FetchAPI = async (searchArea) => {
 }
 
 
-
-
 export default FetchAPI
