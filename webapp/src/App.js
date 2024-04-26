@@ -7,6 +7,7 @@ import Header from './header';
 import Search from './Search';
 import AreaList from './arealist';
 import AreaPage from './AreaPage'
+import Footer from './Footer';
 
 function App() {
   const title = "welcome to the new block";
@@ -16,6 +17,7 @@ function App() {
     <Router>
     <div className="App">
       <Navbar />
+      <Footer />
       <div className="content">
         <Switch>
 
@@ -24,7 +26,7 @@ function App() {
             <Header />
           </Route>
 
-          <Route exact path="/login">
+          <Route exact path="/login" Component={Login}>
             <Login />
           </Route>
 
