@@ -28,7 +28,7 @@ const AreaPage = () => {
     return ( 
         
         <div className="areapage">
-            <AreaList areas={ areas } title="Area" />
+            <AreaList areas={ areas } title="Area" className="heading"/>
         </div>
      );
     }

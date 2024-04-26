@@ -63,7 +63,6 @@
   border-radius:20px;
 }
 
-
 .login {
   display: inline-block;
   margin: 0px;
@@ -109,6 +108,18 @@
 }
 
 .tufaslogo {
+  position: relative;
   font-weight: bold;
   font-size: xx-large;
+}
+
+.mo {
+  position: relative;
+  height: 10vh;
+  width: 10vh;
+  
+}
+
+.modiv {
+  
 }

@@ -28,7 +28,7 @@ function App() {
             <Login />
           </Route>
 
-          <Route exact path="/areapage">
+          <Route exact path="/arealist">
             <AreaPage />
           </Route> 
 
