@@ -8,7 +8,7 @@ const AreaList = ( {areas, title}) => {
             <h2>{title}</h2>
             {areas.map((area) => (
                 <div className="area-preview" key ={area.id}>
-                    <h2>{ area.title }</h2>
+                    <button className="areaitem">{ area.title }</button>
                 </div>
             ))}
         </div>

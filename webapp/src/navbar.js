@@ -1,3 +1,5 @@
+import Search from "./Search";
+
 const Navbar = () => {
     return (  
         <nav className="navbar">

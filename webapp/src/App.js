@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react';
 import Navbar from './navbar';
-import Home from './home';
 import {  BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import ClimbingAreas from './ClimbingAreas';
 import Login from './Login';
-import Search from './Search';
 import Header from './header';
+import Search from './Search';
+import AreaList from './arealist';
+import AreaPage from './AreaPage'
 
 function App() {
   const title = "welcome to the new block";
@@ -18,13 +18,20 @@ function App() {
       <Navbar />
       <div className="content">
         <Switch>
-        <Route exact path= "/">
-          <Search />
-        <Header />
+
+          <Route exact path= "/">
+            <Search/>
+            <Header />
           </Route>
+
           <Route exact path="/login">
-          <Login />
+            <Login />
           </Route>
+
+          <Route exact path="/areapage">
+            <AreaPage />
+          </Route> 
+
         </Switch>
       </div>
     </div>
