@@ -56,6 +56,52 @@
   display: inline-block; /* Make the buttons appear below each other */
   border-radius:20px;
 }
+
+.area-preview {
+  padding: 10px;
+}
+
+
+.climbitem:hover {
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+.climb-preview {
+  flex: 0 0 calc(50% - 20px);
+  margin: 10px;
+  padding: 10px;
+}
+
+.climbitem {
+  background-color: #07565d;
+  border: 3px solid #ffffff;
+  color: white;
+  padding: 15px 24px;
+  cursor: pointer;
+  font-size: large;
+  border-radius: 12px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Container for climb preview buttons */
+.climb-preview-container {
+  text-align: center; /* Center the content horizontally */
+}
+
+/* Box to contain climb preview buttons */
+.climb-preview-box {
+  background-color: #ffffff; /* Light gray background */
+  padding: 20px; /* Padding around the box */
+  border-radius: 20px; /* Rounded corners */
+  margin: 20px auto; /* Center the box horizontally */
+/* Limit the width of the box */
+  display: flex; /* Use flexbox */
+  flex-wrap: wrap; /* Allow content to wrap */
+  justify-content: center; /* Center content horizontally */
+}
+
 .login {
     max-width: 400px;
     margin: auto;
@@ -204,4 +250,9 @@
 
 .search button:hover {
   background-color: #043237;
+}
+
+.noclimbs {
+  padding: 20vh;
+  font-size: 5vh;
 }

@@ -6,6 +6,7 @@ import Login from './Login';
 import Search from './Search';
 import AreaPage from './AreaPage'
 import Footer from './Footer';
+import Climbs from './ClimbsPage';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/" component={Search}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/arealist" component={AreaPage}></Route> 
+          <Route exact path="/climblist" component={Climbs}></Route>
         </Switch>
       </div>
       {/* <Footer /> */}

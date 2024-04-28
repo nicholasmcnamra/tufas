@@ -1,26 +1,36 @@
-import { useEffect, useState } from "react";
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState, useRef } from "react";
+import { useHistory, useLocation } from 'react-router-dom';
 import FetchAPI from "./openbetaapi";
+import Climbs from "./ClimbsPage";
 
 const AreaPage = () => {
     const location = useLocation();
     const [areas, setAreas] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [climbIndex, setClimbIndex] = useState([]);
+    const [apiResult, setApiResult] = useState([]);
+    const [climbs, setClimbs] = useState([]);
+    let history = useHistory();
+    const componentRef = useRef(null);
+    // Retrieve search query from URL parameter
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = searchParams.get('search');
 
     useEffect(() => {
-        // Retrieve search query from URL parameter
-        const searchParams = new URLSearchParams(location.search);
-        const searchQuery = searchParams.get('search');
+
+
 
         // if searchQuery is not null, Fetch Api using the query result as a parameter
         if (searchQuery) {
             setLoading(true);
             FetchAPI(searchQuery)
                 .then((result) => {
-                    setAreas(result.data.areas[0].children);
-                    console.log(result)
-                    setLoading(false);
+                    setTimeout(() => {
+                        setApiResult(result);
+                        setAreas(result.data.areas[0].children);
+                        setLoading(false);
+                    }, 1000)
                 })
                 .catch((error) => {
                     setError(error);
@@ -30,6 +40,15 @@ const AreaPage = () => {
         console.log(searchQuery)
     }, [location.search]);
 
+    //CURRENTLY NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!
+    // Scroll to the component when it is rendered
+    useEffect(() => {
+        if (componentRef.current) {
+            componentRef.current.scrollIntoView({ behavior: 'smooth' });
+            console.log(true)
+        }
+        }, [areas]);
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -38,61 +57,40 @@ const AreaPage = () => {
         return <div>Error: {error.message}</div>;
     }
 
+    const handleClick = async (buttonIndex) => {
+        try {
+            setLoading(true);
+            const result = await FetchAPI(searchQuery); // Assuming FetchAPI is an asynchronous function
+            setApiResult(result);
+            setLoading(false);
+            // Now that apiResult is updated, trigger handleClick
+            setClimbIndex(buttonIndex);
+            // console.log("API result:", result);
+            // console.log("Climb Index:", climbIndex);
+            setClimbs(result.data.areas[0].children[buttonIndex].climbs);
+        } catch (error) {
+            setError(error);
+            setLoading(false);
+        }
+
+        //need to take index of each button
+        //need to set climbs to the subarray returned by FetchAPI
+        //need to share that data as a prop to ClimbsPage
+        //history.push to ClimbsPage
+        //maybe missing a few steps?
+    }
+
     return (
         <div className="area-list">
             {areas.map((area, index) => (
-                <div className="area-preview" key={index}>
-                    <button className="areaitem">{area.area_name}</button>
+                <div className="area-preview" ref={componentRef} key={index}>
+                    <button className="areaitem" onClick={ () => handleClick(index) }> { area.area_name } </button>
                 </div>
             ))}
+            {console.log("Area Page: " + climbs)}
+                        {climbs !== null && <Climbs climbs={climbs} />}
         </div>
     );
 };
 
 export default AreaPage;
-
-
-
-// const handleClickAgain = (name) => {
-//     console.log("hello, " + name) 
-// };
-// onClick={() => {handleClickAgain("mario")}} wraps handleClickAgain in an anonymous function so that the function
-// only runs when someone clicks it, rather than running when the program starts
-// onClick={handleClickAgain} will run the function when the program begins
-// {/* <p className="name">{   name    } is {  age } years old</p>
-// {/* <button className="clickme" onClick={handleClick}>ClickMe</button> */} */}
-
-
-// this is superhelpful for iterating over lists:
-
-// return ( 
-//     <div className="home">
-//         {blogs.map((blog) => (
-//             <div className="blog-preview" key ={blog.id}>
-//                 <h2>{   blog.title  }</h2>
-//                 <p>Written by: {    blog.author }</p>
-//             </div>
-//         ))}
-//     </div>
-//  );
-
-    // const [areas, setAreas] = useState([
-    //     {title: "Giants Workshop"},
-    //     {title: "Sky Top"},
-    //     {title: "Millbrook"},
-    //     {title: "Lost City, The"},
-    //     {title: "Trapps, The"},
-    //     {title: "Trapps Bouldering"},
-    //     {title: "Peterskill Bouldering"},
-    //     {title: "Near Trapps, The"},
-    //     {title: "Near Trapps Bouldering"},
-    //     {title: "Peterskill"}
-
-        // { title: results.data.areas[0].area_name },
-    // ])
-
-        // const listItems = result.data.areas[1].children.map((climbs, index) => (
-    //     <li key={index} className="area-preview">{climbs.area_name}</li>
-    // ));
-
-                {/* <AreaList areas={ searchArea } title="Area" className="heading"/> */}

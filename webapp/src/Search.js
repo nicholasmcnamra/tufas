@@ -25,7 +25,7 @@ const Search = () => {
             <input  className="searchbar"id='title'></input>
             <button className="searchbutton" 
             onClick={() => HandleClick(document.getElementById('title').value)}
-            >Find Areas</button>
+            >Find Climbs</button>
             </div>
 
         </div>
