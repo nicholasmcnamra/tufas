@@ -1,30 +1,33 @@
-import { useState, useEffect } from "react";
-import {  BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import { useState } from "react";
+import { useHistory} from 'react-router-dom';
 import FetchAPI from "./openbetaapi";
-import Login from "./Login";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import AreaPage from "./AreaPage";
 
 const Search = () => {
     let [searchArea, setSearchArea] = useState("");
+    let [result, setResult] = useState(null);
+    const [searched, setSearched] = useState(false);
     let history = useHistory();
+
     const HandleClick = async (v) => {
-        // e.preventDefault();
-        // setSearchArea(v);
-        // let result = await FetchAPI(v)
-        // console.log(result);
-        console.log(v);
-        // return result;
-        history.push("/login");
+        setSearchArea(v);
+        setSearched(true);
+        let aPIResult = await FetchAPI(v);
+        setResult(aPIResult);
+        history.push(`/arealist?search=${v}`);
       };
 
     return (
+        
         <div>
+            <div> {searched && <AreaPage result={result}/>}</div>
             <div className="search">
             <input  className="searchbar"id='title'></input>
             <button className="searchbutton" 
             onClick={() => HandleClick(document.getElementById('title').value)}
-            >Click me!</button>
+            >Find Areas</button>
             </div>
+
         </div>
 
     )

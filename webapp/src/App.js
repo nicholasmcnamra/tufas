@@ -1,41 +1,31 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Navbar from './navbar';
-import {  BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {  BrowserRouter as Router, Route, Switch, useHistory} from 'react-router-dom';
 import Login from './Login';
-import Header from './header';
 import Search from './Search';
-import AreaList from './arealist';
 import AreaPage from './AreaPage'
 import Footer from './Footer';
+
 
 function App() {
   const title = "welcome to the new block";
 
-
   return (
+    
     <Router>
     <div className="App">
-      <Navbar />
-      <Footer />
+    <Navbar />
+    <div className="image-container">
+      <img src={"./natgeo.jpeg"} alt="Full Screen Image" /></div>
       <div className="content">
         <Switch>
-
-          <Route exact path= "/">
-            <Search/>
-            <Header />
-          </Route>
-
-          <Route exact path="/login" Component={Login}>
-            <Login />
-          </Route>
-
-          <Route exact path="/arealist">
-            <AreaPage />
-          </Route> 
-
+        <Route exact path="/" component={Search}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/arealist" component={AreaPage}></Route> 
         </Switch>
       </div>
+      {/* <Footer /> */}
     </div>
     </Router>
   );

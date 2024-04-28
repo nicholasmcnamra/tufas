@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import FetchLocalAPI from './fetchlocalapi';
 
 const Login= () => {
+  const componentRef = useRef(null);
+
+  // Scroll to the component when it is rendered
+  useEffect(() => {
+    if (componentRef.current) {
+      componentRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,7 +26,7 @@ const Login= () => {
   };
 
   return (
-    <div className="login">
+    <div className="login" ref={componentRef}>
       <h2>Login</h2>
       <form onSubmit={handleFormSubmit }>
         <div>

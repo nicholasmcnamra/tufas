@@ -1,22 +1,21 @@
-import FetchAPI from "./openbetaapi";
+// import FetchAPI from "./openbetaapi";
 
-const AreaList = ( {areas, title}) => {
-
-
-    return (
-        <div className="area-list">
-            <h2>{title}</h2>
+// const AreaList = ( {searchArea, title}) => {
 
 
-            {areas.map((area) => (
-                <div className="area-preview" key ={area.id}>
-                    <button className="areaitem">{ area.title }</button>
-                </div>
-            ))}
+//     return (
+//         <div className="area-list">
+//             <h2>{title}
+//             </h2>
+//             {searchArea.map((area) => (
+//                 <div className="area-preview" key ={area.id}>
+//                     <button className="areaitem">{ area.title }</button>
+//                 </div>
+//             ))}
 
             
-        </div>
-    )
-}
+//         </div>
+//     )
+// }
 
-export default AreaList;
+// export default AreaList;

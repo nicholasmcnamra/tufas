@@ -31,12 +31,6 @@
   color: #caa512d0;
 }
 
-.searchbar {
-  height: 0px;
-  width: 300px;
-  padding: 10px;
-}
-
 .searchbutton {
   padding: 10px;
 }
@@ -62,39 +56,61 @@
   display: inline-block; /* Make the buttons appear below each other */
   border-radius:20px;
 }
-
 .login {
-  display: inline-block;
-  margin: 0px;
-}
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
 
-.username {
-  display: inline-flex;
-  padding: 10px 16px;
-  margin: 20px 0;
-}
-.usernamebox {
-  display: inline-flex;
-  padding: 10px 0px 10px 30px;
-  margin: 20px 0;
-}
-
-.password {
-  display: inline-flex;
-  padding: 10px 16px;
-  margin: 20px 0;
-}
-.passwordbox {
-  display: inline-flex;
-  padding: 10px 0px 10px 30px;
-  margin: 20px 0;
-}
-
-.loginbutton {
-  display: inline-flex;
-  padding: 10px 16px;
-  margin: 20px 0;
-}
+  .signup {
+    max-width: 400px;
+    margin-left: auto; 
+    margin-right: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    float: right;
+  }
+  
+  .login h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .login .username,
+  .login .password {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .login .usernamebox,
+  .login .passwordbox {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .loginbutton {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .loginbutton:hover {
+    background-color: #0056b3;
+  }
 
 .text {
   display: absolute;
@@ -109,6 +125,7 @@
 
 .tufaslogo {
   position: relative;
+  margin-right: 30px;
   font-weight: bold;
   font-size: xx-large;
 }
@@ -139,4 +156,52 @@
 .pfooter {
   font-size: large;
   color: #92918bd0;
+}
+
+.App {
+  position: relative;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container img {
+  width: 100vw; /* 100% of viewport width */
+  height: 100vh; /* 100% of viewport height */
+  object-fit: cover; /* Maintain aspect ratio while covering container */
+}
+
+.search {
+  position: absolute;
+  top: 25%; /* Align search bar vertically at 50% of image container */
+  left: 50%; /* Align search bar horizontally at 50% of image container */
+  transform: translate(-50%, -50%); /* Center the search bar */
+  z-index: 1; /* Ensure the search bar is above the image */
+  text-align: center; /* Center align text */
+}
+
+.searchbar {
+  width: 30vw; /* Adjust width as needed */
+  padding: 2vh; /* Increase padding for larger size */
+  border: 1px solid #000000;
+  border-radius: 8px; /* Increase border radius for rounded corners */
+  font-size: 18px; /* Increase font size */
+  outline: none; /* Remove outline */
+}
+
+.search button {
+  width: 15vw; /* Adjust width relative to viewport width */
+  padding: 2vh;
+  background-color: #07565d;
+  color: white;
+  border: 1px solid #000000;
+  border-radius: 8px; /* Increase border radius for rounded corners */
+  cursor: pointer;
+  font-size: 18px; /* Increase font size */
+  margin-left: 10px;
+}
+
+.search button:hover {
+  background-color: #043237;
 }

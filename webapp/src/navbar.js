@@ -7,7 +7,7 @@ const Navbar = () => {
             <Mo className="modiv"/>
             <a href="/" className="tufaslogo">Tufas</a>
             <a href="/login" className="login">Log in</a>
-            <a href="/climbing_areas" className="signup">Sign Up</a>
+            <a href="/arealist" className="signup">Sign Up</a>
         </nav>
     );
 }

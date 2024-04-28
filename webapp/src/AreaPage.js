@@ -1,40 +1,54 @@
-import { useState } from "react";
-import AreaList from './arealist';
+import { useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import FetchAPI from "./openbetaapi";
 
-// const results = await FetchAPI("Gunks");
-
 const AreaPage = () => {
-    const [areas, setAreas] = useState([
-        {title: "Giants Workshop"},
-        {title: "Sky Top"},
-        {title: "Millbrook"},
-        {title: "Lost City, The"},
-        {title: "Trapps, The"},
-        {title: "Trapps Bouldering"},
-        {title: "Peterskill Bouldering"},
-        {title: "Near Trapps, The"},
-        {title: "Near Trapps Bouldering"},
-        {title: "Peterskill"}
+    const location = useLocation();
+    const [areas, setAreas] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-        // { title: results.data.areas[0].area_name },
-    ])
+    useEffect(() => {
+        // Retrieve search query from URL parameter
+        const searchParams = new URLSearchParams(location.search);
+        const searchQuery = searchParams.get('search');
 
-    // const listItems = results.data.areas[1].children.map((climbs) =>
-    // <li className="area-preview">{climbs.area_name}</li>
-    // );
+        // if searchQuery is not null, Fetch Api using the query result as a parameter
+        if (searchQuery) {
+            setLoading(true);
+            FetchAPI(searchQuery)
+                .then((result) => {
+                    setAreas(result.data.areas[0].children);
+                    console.log(result)
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    setError(error);
+                    setLoading(false);
+                });
+        }
+        console.log(searchQuery)
+    }, [location.search]);
 
-
-    return ( 
-        
-        <div className="areapage">
-            <AreaList areas={ areas } title="Area" className="heading"/>
-        </div>
-     );
+    if (loading) {
+        return <div>Loading...</div>;
     }
 
-    // console.log(results);
- 
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    return (
+        <div className="area-list">
+            {areas.map((area, index) => (
+                <div className="area-preview" key={index}>
+                    <button className="areaitem">{area.area_name}</button>
+                </div>
+            ))}
+        </div>
+    );
+};
+
 export default AreaPage;
 
 
@@ -61,3 +75,24 @@ export default AreaPage;
 //         ))}
 //     </div>
 //  );
+
+    // const [areas, setAreas] = useState([
+    //     {title: "Giants Workshop"},
+    //     {title: "Sky Top"},
+    //     {title: "Millbrook"},
+    //     {title: "Lost City, The"},
+    //     {title: "Trapps, The"},
+    //     {title: "Trapps Bouldering"},
+    //     {title: "Peterskill Bouldering"},
+    //     {title: "Near Trapps, The"},
+    //     {title: "Near Trapps Bouldering"},
+    //     {title: "Peterskill"}
+
+        // { title: results.data.areas[0].area_name },
+    // ])
+
+        // const listItems = result.data.areas[1].children.map((climbs, index) => (
+    //     <li key={index} className="area-preview">{climbs.area_name}</li>
+    // ));
+
+                {/* <AreaList areas={ searchArea } title="Area" className="heading"/> */}
