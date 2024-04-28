@@ -1,7 +1,9 @@
 import { useDebugValue, useEffect, useState } from "react"
+import Description from "./ClimbDescription";
 
 const Climbs = ({ climbs }) => {
     const [climbsList, setClimbsList] = useState([]);
+    const [climbIndex, setClimbIndex] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -17,31 +19,30 @@ const Climbs = ({ climbs }) => {
         setLoading(false); // Update loading state even if climbs is empty
     }}, [climbs]) 
 
-        const listClimbs = () => {
-            if (Array.isArray(climbs)) {
-            return climbs.map((climb, index) => (
-            <div className="climb-preview-container">
-            <div className="climb-preview" key={index}>
-            <button className="climbitem"> {climb.name}</button>
-        </div>
-        </div>
-        ));
-    }
-    else {
-        return <div className="noclimbs">No Climbs to Display</div>
-    }
-};
-
     if (loading) {
         return <div>Loading...</div>;
     }
 
+    const handleClick = (buttonIndex) => {      
+            setClimbIndex(buttonIndex);
+    }
+
     return (
         <div className="climb-preview-box">
-            {listClimbs()}
+            {climbs.map((climb, index) => (
+            <div className="climb-preview-container">
+            <div className="climb-preview" key={index}>
+            <button className="climbitem" onClick={ () => handleClick(index)}> {climb.name}</button>
         </div>
+        
+        </div>
+        ))}
+        <div className="descriptionarea"><Description climbs={ climbs } climbIndex= {climbIndex }/></div>
+        </div>
+        
+        
     );
-}
+};
 export default Climbs
 
 
@@ -66,3 +67,21 @@ export default Climbs
 // if (error) {
 //     return <div>Error: {error.message}</div>;
 // }
+
+
+//USE THIS IF RETURN NOT RENDERING
+
+// const listClimbs = () => {
+//     if (Array.isArray(climbs)) {
+//     return climbs.map((climb, index) => (
+//     <div className="climb-preview-container">
+//     <div className="climb-preview" key={index}>
+//     <button className="climbitem"> {climb.name}</button>
+// </div>
+// </div>
+// ));
+// }
+// else {
+// return <div className="noclimbs">No Climbs to Display</div>
+// }
+// };

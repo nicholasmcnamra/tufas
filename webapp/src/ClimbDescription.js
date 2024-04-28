@@ -1,0 +1,26 @@
+import { useEffect, useState } from "react";
+
+const Description = ({ climbs, climbIndex }) => {
+    const [climbToDisplay, setClimbToDisplay] = useState(climbs[climbIndex]);
+
+    useEffect(() => {
+        setClimbToDisplay(climbs[climbIndex]);
+        return () => {};
+    }, [climbs, climbIndex]);
+
+    if (!climbToDisplay) {
+        return <div></div>; // Or any other placeholder or loading indicator
+    }
+
+    return (
+        <div className="description-preview-box">
+            <h2 className="climb-to-display-name">{climbToDisplay.name}</h2>
+            <p className="grade">{climbToDisplay.grades.vscale}</p>
+            <p className="climb-to-display-description">{climbToDisplay.content.description}</p>
+            <p className="protection">{climbToDisplay.content.protection}</p>
+
+        </div>
+    )
+}
+
+export default Description;

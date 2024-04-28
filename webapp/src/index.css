@@ -102,6 +102,24 @@
   justify-content: center; /* Center content horizontally */
 }
 
+
+
+
+.descriptionarea{
+  
+}
+
+.description-preview-box {
+  background-color: #ddd9d9; /* Light gray background */
+  padding: 50px; /* Padding around the box */
+  border-radius: 20px; /* Rounded corners */
+  margin: 20px auto; /* Center the box horizontally */
+/* Limit the width of the box */
+  display: flex; /* Use flexbox */
+  flex-wrap: wrap; /* Allow content to wrap */
+  justify-content: center; /* Center content horizontally */
+}
+
 .login {
     max-width: 400px;
     margin: auto;
