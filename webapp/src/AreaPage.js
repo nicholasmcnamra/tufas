@@ -36,7 +36,7 @@ const AreaPage = () => {
                         setApiResult(result);
                         setAreas(result.data.areas[0].children);
                         setLoading(false);
-                    }, 1000)
+                    }, 200)
                 })
                 .catch((error) => {
                     setError(error);
