@@ -8,6 +8,7 @@ import AreaPage from './AreaPage'
 import Footer from './Footer';
 import Climbs from './ClimbsPage';
 import Description from './ClimbDescription';
+import FetchLocalAPI from './fetchlocalapi';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/arealist" component={AreaPage}></Route> 
           <Route exact path="/climblist" component={Climbs}></Route>
           <Route exact path="/climbdescription" component={Description}></Route>
+          <Route exact path="/fetch8080" component={FetchLocalAPI}></Route>
         </Switch>
       </div>
       {/* <Footer /> */}

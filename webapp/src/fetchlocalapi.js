@@ -1,22 +1,34 @@
+import React, { useEffect } from "react";
+
 const FetchLocalAPI = () => {    
+  let response;
+  let data
+  useEffect(() => {
+    const fetchData = async () => {
     try {
-    fetch("http://localhost:8080/users", {
+      response = await fetch("http://localhost:8080/users", {
             mode: 'cors',
             method: 'GET',
             headers: {'Content-Type':'application/json'},
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response not okay")
-      }
-      return response.json();
-    })
-    .then (data => {
-      console.log("data received:", data)
-    })
+    });
+    if (!response.ok) {
+      throw new Error("Network response not okay");
+    }
+    
+     data = await response.json();
+
+    console.log("Data received", data);
   }
   catch (error) {
-    console.log("Not okay")
-  }}
+    console.log("Error fetching data", error);
+  }};
+
+  fetchData()
+}, {});
+
+return (
+  <div>{console.log(data)}</div>
+)
+};
 
   export default FetchLocalAPI

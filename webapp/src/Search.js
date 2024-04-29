@@ -23,7 +23,7 @@ const Search = () => {
             <div> {searched && <AreaPage result={result}/>}</div>
             <div className="search">
             <input  className="searchbar"id='title'></input>
-            <button className="searchbutton" 
+            <button className="searchbutton" type="submit"
             onClick={() => HandleClick(document.getElementById('title').value)}
             >Find Climbs</button>
             </div>

@@ -17,10 +17,16 @@ const AreaPage = () => {
     const searchParams = new URLSearchParams(location.search);
     const searchQuery = searchParams.get('search');
 
+    //CURRENTLY NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!
+    // Scroll to the component when it is rendered
     useEffect(() => {
+        if (componentRef.current) {
+            componentRef.current.scrollIntoView({ behavior: 'smooth' });
+            console.log(true)
+        }
+        }, [areas]);
 
-
-
+    useEffect(() => {
         // if searchQuery is not null, Fetch Api using the query result as a parameter
         if (searchQuery) {
             setLoading(true);
@@ -39,15 +45,6 @@ const AreaPage = () => {
         }
         console.log(searchQuery)
     }, [location.search]);
-
-    //CURRENTLY NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!
-    // Scroll to the component when it is rendered
-    useEffect(() => {
-        if (componentRef.current) {
-            componentRef.current.scrollIntoView({ behavior: 'smooth' });
-            console.log(true)
-        }
-        }, [areas]);
 
     if (loading) {
         return <div>Loading...</div>;

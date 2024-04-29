@@ -7,7 +7,7 @@
   font-family: "Urbanist";
   color: #333;
 }
-
+/* NAVBAR STYLING */
 .navbar {
   padding: 20px;
   display: flex;
@@ -31,16 +31,7 @@
   color: #caa512d0;
 }
 
-.searchbutton {
-  padding: 10px;
-}
-
-/* .content {
-  margin: 40px auto;
-  padding: 20px;
-} */
-
-
+/* CLIMB AREA STYLING */
 .areaitem:hover {
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
 }
@@ -61,18 +52,19 @@
   padding: 10px;
 }
 
-
+/* CLIMB STYLING */
 .climbitem:hover {
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
 }
 
 .climb-preview {
-  flex: 0 0 calc(50% - 20px);
-  margin: 10px;
-  padding: 10px;
+  display: flex;
+  padding: 50px;
+  flex-wrap: wrap; /* Allow buttons to wrap into multiple lines */
+  justify-content: space-between; /* Align buttons to the right */
 }
 
-.climbitem {
+.climb-preview button {
   background-color: #07565d;
   border: 3px solid #ffffff;
   color: white;
@@ -80,9 +72,8 @@
   cursor: pointer;
   font-size: large;
   border-radius: 12px;
-  width: 100%;
-  text-align: center;
-  box-sizing: border-box;
+  width: 250px; /* Set a fixed width for each button */
+  margin: 5px; /* Add margin for spacing between buttons */
 }
 
 /* Container for climb preview buttons */
@@ -103,78 +94,133 @@
 }
 
 
-
-
-.descriptionarea{
-  
+/*DESCRIPTION STYLING*/
+.button-container button:hover {
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
 }
 
+.description-container {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.grade  {
+  padding-bottom: 10px;
+}
+.climb-preview-box p {
+  padding: 10px;
+}
+
+.desc, .prot{
+  font-size: 24px;;
+}
 .description-preview-box {
-  background-color: #ddd9d9; /* Light gray background */
-  padding: 50px; /* Padding around the box */
-  border-radius: 20px; /* Rounded corners */
-  margin: 20px auto; /* Center the box horizontally */
-/* Limit the width of the box */
-  display: flex; /* Use flexbox */
-  flex-wrap: wrap; /* Allow content to wrap */
-  justify-content: center; /* Center content horizontally */
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: left;
+  width: 65%;
+}
+.climb-to-display-name {
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.grade, .protection {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #666;
+}
+.climb-to-display-description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #444;
+}
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 30%;
+  padding-left: 20px;
+}
+.button-container button {
+  background-color: #222d2e;
+  border: 3px solid #ffffff;
+  color: white;
+  padding: 15px 24px;
+  width: 100%;
+  cursor: pointer;
+  font-size: large;
+  border-radius: 12px;
+  margin-bottom: 10px;
 }
 
-.login {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+@media (max-width: 768px) {
+  .description-preview-box,
+  .button-container {
+    width: 100%;
   }
+}
 
-  .signup {
-    max-width: 400px;
-    margin-left: auto; 
-    margin-right: 100px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    float: right;
-  }
+/*LOGIN STYLING*/
+.login {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup {
+  max-width: 400px;
+  margin-left: auto; 
+  margin-right: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  float: right;
+}
   
-  .login h2 {
+.login h2 {
     text-align: center;
     margin-bottom: 20px;
   }
   
-  .login .username,
-  .login .password {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .login .usernamebox,
-  .login .passwordbox {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  .loginbutton {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .loginbutton:hover {
-    background-color: #0056b3;
-  }
+.login .username,
+.login .password {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.login .usernamebox,
+.login .passwordbox {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.loginbutton {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginbutton:hover {
+  background-color: #0056b3;
+}
 
 .text {
   display: absolute;
@@ -236,6 +282,11 @@
   object-fit: cover; /* Maintain aspect ratio while covering container */
 }
 
+
+/* SEARCH BUTTON STYLING */
+.searchbutton {
+  padding: 10px;
+}
 .search {
   position: absolute;
   top: 25%; /* Align search bar vertically at 50% of image container */

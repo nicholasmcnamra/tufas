@@ -1,4 +1,4 @@
-import { useDebugValue, useEffect, useState } from "react"
+import { useRef, useEffect, useState } from "react"
 import Description from "./ClimbDescription";
 
 const Climbs = ({ climbs }) => {
@@ -6,6 +6,7 @@ const Climbs = ({ climbs }) => {
     const [climbIndex, setClimbIndex] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const componentRef = useRef(null);
 
     useEffect(()=> {
         if (Array.isArray(climbs) && climbs.length > 0) {
@@ -19,6 +20,13 @@ const Climbs = ({ climbs }) => {
         setLoading(false); // Update loading state even if climbs is empty
     }}, [climbs]) 
 
+    useEffect(() => {
+        if (componentRef.current) {
+            componentRef.current.scrollIntoView({ behavior: 'smooth' });
+            console.log(true)
+        }
+        }, [climbsList]);
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -26,6 +34,7 @@ const Climbs = ({ climbs }) => {
     const handleClick = (buttonIndex) => {      
             setClimbIndex(buttonIndex);
     }
+
 
     return (
         <div className="climb-preview-box">
