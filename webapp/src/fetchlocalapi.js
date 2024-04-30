@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 
-const FetchLocalAPI = () => {    
+const FetchLocalAPI = async () => {    
   let response;
   let data
-  useEffect(() => {
-    const fetchData = async () => {
-      let xhr = new XMLHttpRequest();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+    let xhr = new XMLHttpRequest();
     try {
       response = await fetch("http://localhost:8080/api/users", {
             mode: 'cors',
@@ -19,18 +19,14 @@ const FetchLocalAPI = () => {
     
     data = await response.json();
     console.log("Data received", data);
+    return data;
   }
   catch (error) {
     console.log("Error fetching data", error);
     console.warn(xhr.response)
   }};
 
-  fetchData()
-}, []);
-
-return (
-  <div>{console.log(data)}</div>
-)
-};
+// }, []);
+// };
 
   export default FetchLocalAPI

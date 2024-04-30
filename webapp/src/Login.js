@@ -13,22 +13,31 @@ const Login= () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async(e) => {
     e.preventDefault();
+
     
     if (!username || !password) {
       alert('Please fill in both fields.');
       return;
     }
-    
-    FetchLocalAPI();
-    console.log(username,password)
+    else {
+      let apiResult = await FetchLocalAPI();
+      console.log(apiResult)
+      for (let i = 0; i < apiResult.length; i++) {
+        if (apiResult[i].username == username && apiResult[i].password == password)
+        return true;
+        console.log(`Welcome back ${apiResult[i].firstName}!`)
+      }
+    }
+
   };
 
   return (
     <div className="login" ref={componentRef}>
       <h2>Login</h2>
-      <form onSubmit={handleFormSubmit }>
+      <form onSubmit={ handleFormSubmit }>
+
         <div>
           <label className="username" htmlFor="username">Username:</label>
           <input className="usernamebox"
@@ -38,6 +47,7 @@ const Login= () => {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
+
         <div>
           <label className="password" htmlFor="password">Password:</label>
           <input className="passwordbox"
@@ -47,6 +57,7 @@ const Login= () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
         <button className="loginbutton" type="submit">Log In</button>
       </form>
     </div>
