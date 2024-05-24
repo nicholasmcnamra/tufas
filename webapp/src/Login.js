@@ -22,13 +22,12 @@ const Login= () => {
       return;
     }
     else {
-      let apiResult = await FetchLocalAPI();
+      let apiResult = await FetchLocalAPI(username, password);
+      console.log(username, password);
       console.log(apiResult)
-      for (let i = 0; i < apiResult.length; i++) {
-        if (apiResult[i].username == username && apiResult[i].password == password)
-        return true;
-        console.log(`Welcome back ${apiResult[i].firstName}!`)
-      }
+        if (apiResult) 
+          console.log(`Welcome back!`)
+          return true;
     }
 
   };

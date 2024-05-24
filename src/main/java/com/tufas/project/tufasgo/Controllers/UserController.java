@@ -1,8 +1,11 @@
 package com.tufas.project.tufasgo.Controllers;
-
+import com.tufas.project.tufasgo.Security.JwtTokenResponse;
+import io.jsonwebtoken.Jwts;
 import com.tufas.project.tufasgo.Entities.User;
 import com.tufas.project.tufasgo.Services.UserService;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,16 +59,19 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<JwtTokenResponse> login(@RequestParam String username, @RequestParam String password) {
         try {
             // Retrieve user details by username
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             // Check if password matches
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }
 
             // Create authentication token
@@ -74,14 +80,24 @@ public class UserController {
             // Set the authentication object in the SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Return success message
-            return ResponseEntity.ok("success");
+            // Generate JWT token
+            String token = Jwts.builder()
+                    .setSubject(userDetails.getUsername())
+                    // Set additional claims if needed (e.g., roles)
+                    .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                    .compact();
+
+            // Create JwtTokenResponse object
+            JwtTokenResponse tokenResponse = new JwtTokenResponse(token, "Bearer");
+
+            // Return JwtTokenResponse in response body
+            return ResponseEntity.ok(tokenResponse);
         } catch (UsernameNotFoundException e) {
             // Handle user not found
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         } catch (Exception e) {
             // Handle other exceptions
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 }
