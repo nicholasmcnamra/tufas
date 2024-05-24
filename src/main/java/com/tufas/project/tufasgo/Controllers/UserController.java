@@ -18,6 +18,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -64,7 +66,9 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
-    public ResponseEntity<JwtTokenResponse> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<JwtTokenResponse> login(@RequestBody Map<String, String> requestBody) {
+        String username = requestBody.get("username");
+        String password = requestBody.get("password");
         try {
             // Retrieve user details by username
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
