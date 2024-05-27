@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserTests {
-    
+
     public static List<User> createMockUsers() {
         List<User> mockUsers = new ArrayList<>();
 
