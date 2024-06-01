@@ -16,7 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Map;
 
@@ -24,9 +28,20 @@ import java.util.Map;
 @RequestMapping("/api")
 public class UserController {
     private UserService service;
+    private final OAuth2AuthorizedClientService clientService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-    public UserController(UserService service) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
+    @Autowired
+    public UserController(UserService service, OAuth2AuthorizedClientService clientService) {
         this.service = service;
+        this.clientService = clientService;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -55,14 +70,25 @@ public class UserController {
         return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
     }
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    @GetMapping("/login/oauth2/code/google")
+    public RedirectView loginSuccess(@PathVariable String provider, OAuth2AuthenticationToken authenticationToken) {
+        OAuth2AuthorizedClient client = clientService.loadAuthorizedClient(
+                authenticationToken.getAuthorizedClientRegistrationId(),
+                authenticationToken.getName()
+        );
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+        return new RedirectView("/login-success");
+    }
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    @PostMapping("/login")
+//    public ResponseEntity<String> login(@RequestBody Map<String, String> requestBody) {
+//        String accessToken = requestBody.get("accessToken");
+//
+//        // Verify access token with Google OAuth2 token validation endpoint
+//
+//        return ResponseEntity.ok("Received access token: " + accessToken);
+//    }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")

@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -57,6 +58,7 @@ public class SecurityConfiguration  {
 
                 .authorizeHttpRequests( auth -> {
                     auth.requestMatchers("/api/**").permitAll();
+                    auth.requestMatchers("/login/oauth2/code/google").authenticated();
                     auth.requestMatchers(HttpMethod.POST, "/login").permitAll();
                     auth.anyRequest().authenticated();
 
@@ -88,9 +90,11 @@ public class SecurityConfiguration  {
                         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                         .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
                         .tokenUri("https://www.googleapis.com/oauth2/v4/token")
-                        .redirectUri("{baseUrl}/login/oauth2/code/google")
-                        .jwkSetUri("http://localhost:3000/")
+                        .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
+                        .jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
                         .scope("openid", "email", "profile")
+                        .userNameAttributeName(IdTokenClaimNames.SUB)
+                        .clientName("Google")
                         .build()
         );
     }
