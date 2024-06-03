@@ -37,8 +37,9 @@ const Login= () => {
 const handleGoogleLogin = async () => {
   try {
     // Make a request to the backend server to initiate the Google OAuth2 flow
-    const response = await axios.get('http://localhost:8080//login/oauth2/code/google');
-    window.location.href = response.data.redirectUrl;
+    const response = await axios.post('http://localhost:8080/login/oauth2/code/google');
+    console.log(response.data);
+    window.location.href = response.data;
   } catch (error) {
     console.error('Error initiating Google login:', error);
   }
@@ -70,8 +71,8 @@ const handleGoogleLogin = async () => {
         </div>
 
         <button className="loginbutton" type="submit">Log In</button>
-        <button onClick={handleGoogleLogin}>Login with Google</button>
       </form>
+      <button onClick={handleGoogleLogin}>Login with Google</button>
     </div>
   );
 }

@@ -70,6 +70,7 @@ public class UserController {
         return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login/oauth2/code/google")
     public RedirectView loginSuccess(@PathVariable String provider, OAuth2AuthenticationToken authenticationToken) {
         OAuth2AuthorizedClient client = clientService.loadAuthorizedClient(
