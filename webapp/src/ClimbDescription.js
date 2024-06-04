@@ -9,7 +9,7 @@ const Description = ({ climbs, climbIndex }) => {
     }, [climbs, climbIndex]);
 
     if (!climbToDisplay) {
-        return <div></div>; // Or any other placeholder or loading indicator
+        return <div></div>;
     }
 
     return (

@@ -98,8 +98,6 @@ public class SecurityConfiguration  {
                     auth.anyRequest().authenticated();
 
                 })
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
                 .oauth2Login(withDefaults())
                 .formLogin(withDefaults())
                 .build();
