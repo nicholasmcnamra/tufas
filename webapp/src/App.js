@@ -10,6 +10,7 @@ import Climbs from './ClimbsPage';
 import Description from './ClimbDescription';
 import FetchLocalAPI from './fetchlocalapi';
 import UserClimbs from './UserClimbs';
+import TestAreaPage from './TestAreaPage';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/climbdescription" component={withImage(Description)}></Route>
           <Route exact path="/fetch8080" component={FetchLocalAPI}></Route>
           <Route exact path="/userclimbs" component={UserClimbs}></Route>
+          <Route exact path="/TestAreaPage" component={TestAreaPage}></Route>
         </Switch>
 
       {/* <Footer /> */}
