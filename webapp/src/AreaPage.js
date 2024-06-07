@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useLayoutEffect, useRef } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
 import FetchAPI from "./openbetaapi";
 import Climbs from "./ClimbsPage";
@@ -19,10 +19,11 @@ const AreaPage = () => {
 
     //CURRENTLY NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!
     // Scroll to the component when it is rendered
-    useEffect(() => {
+    useLayoutEffect(() => {
+        console.log("Areas updated, scrolling to first button...");
         if (componentRef.current) {
-            componentRef.current.scrollIntoView({ behavior: 'smooth' });
-            console.log(true)
+            console.log("Scrolling...");
+            componentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         }, [areas]);
 
@@ -32,11 +33,10 @@ const AreaPage = () => {
             setLoading(true);
             FetchAPI(searchQuery)
                 .then((result) => {
-                    setTimeout(() => {
                         setApiResult(result);
                         setAreas(result.data.areas[0].children);
                         setLoading(false);
-                    }, 200)
+
                 })
                 .catch((error) => {
                     setError(error);
@@ -80,7 +80,7 @@ const AreaPage = () => {
     return (
         <div className="area-list">
             {areas.map((area, index) => (
-                <div className="area-preview" ref={componentRef} key={index}>
+                <div className="area-preview" key={index} ref={componentRef}>
                     <button className="areaitem" onClick={ () => handleClick(index) }> { area.area_name } </button>
                 </div>
             ))}
