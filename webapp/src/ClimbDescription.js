@@ -1,7 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Description = ({ climbs, climbIndex }) => {
     const [climbToDisplay, setClimbToDisplay] = useState(climbs[climbIndex]);
+    const componentRef = useRef(null);
+
+    useEffect(() => {
+        if (componentRef.current) {
+            componentRef.current.scrollIntoView({behavior: 'smooth'})
+            console.log(true);
+        }
+    }, [climbToDisplay])
 
     useEffect(() => {
         setClimbToDisplay(climbs[climbIndex]);
@@ -13,7 +21,7 @@ const Description = ({ climbs, climbIndex }) => {
     }
 
     return (
-        <div className="description-container">
+        <div className="description-container" ref={componentRef}>
             <div className="description-preview-box">
                 <h2 className="climb-to-display-name">{climbToDisplay.name}</h2>
                 <p className="grade">{climbToDisplay.grades.vscale}</p>

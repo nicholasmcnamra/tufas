@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
 import FetchAPI from "./openbetaapi";
 import Climbs from "./ClimbsPage";
@@ -6,7 +6,6 @@ import Climbs from "./ClimbsPage";
 const AreaPage = () => {
     const location = useLocation();
     const [areas, setAreas] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [climbIndex, setClimbIndex] = useState([]);
     const [apiResult, setApiResult] = useState([]);
@@ -17,38 +16,29 @@ const AreaPage = () => {
     const searchParams = new URLSearchParams(location.search);
     const searchQuery = searchParams.get('search');
 
-    //CURRENTLY NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!
-    // Scroll to the component when it is rendered
-    useLayoutEffect(() => {
-        console.log("Areas updated, scrolling to first button...");
+    useEffect(() => {
         if (componentRef.current) {
-            console.log("Scrolling...");
-            componentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            componentRef.current.scrollIntoView({ behavior: 'smooth' });
+            console.log(true)
         }
         }, [areas]);
 
     useEffect(() => {
         // if searchQuery is not null, Fetch Api using the query result as a parameter
         if (searchQuery) {
-            setLoading(true);
             FetchAPI(searchQuery)
                 .then((result) => {
+
                         setApiResult(result);
+                        console.log(apiResult);
                         setAreas(result.data.areas[0].children);
-                        setLoading(false);
 
                 })
                 .catch((error) => {
                     setError(error);
-                    setLoading(false);
                 });
-        }
-        console.log(searchQuery)
-    }, [location.search]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+            }
+        }, [location.search]);
 
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -56,18 +46,13 @@ const AreaPage = () => {
 
     const handleClick = async (buttonIndex) => {
         try {
-            setLoading(true);
-            const result = await FetchAPI(searchQuery); // Assuming FetchAPI is an asynchronous function
-            setApiResult(result);
-            setLoading(false);
-            // Now that apiResult is updated, trigger handleClick
+            // const result = await FetchAPI(searchQuery); // Assuming FetchAPI is an asynchronous function
+            // setApiResult(result);
+            // // Now that apiResult is updated, trigger handleClick
             setClimbIndex(buttonIndex);
-            // console.log("API result:", result);
-            // console.log("Climb Index:", climbIndex);
-            setClimbs(result.data.areas[0].children[buttonIndex].climbs);
+            setClimbs(apiResult.data.areas[0].children[buttonIndex].climbs);
         } catch (error) {
             setError(error);
-            setLoading(false);
         }
 
         //need to take index of each button
@@ -78,9 +63,9 @@ const AreaPage = () => {
     }
 
     return (
-        <div className="area-list">
+        <div className="area-list" ref={componentRef}>
             {areas.map((area, index) => (
-                <div className="area-preview" key={index} ref={componentRef}>
+                <div className="area-preview"  key={index} >
                     <button className="areaitem" onClick={ () => handleClick(index) }> { area.area_name } </button>
                 </div>
             ))}

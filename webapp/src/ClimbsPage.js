@@ -37,7 +37,7 @@ const Climbs = ({ climbs }) => {
 
 
     return (
-        <div className="climb-preview-box">
+        <div className="climb-preview-box" ref={componentRef}>
             {climbs.map((climb, index) => (
             <div className="climb-preview-container">
             <div className="climb-preview" key={index}>
