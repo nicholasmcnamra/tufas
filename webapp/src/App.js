@@ -1,14 +1,14 @@
 import './App.css';
 import React, {useEffect} from 'react';
-import Navbar from './navbar';
+import Navbar from './Components/navbar';
 import {  BrowserRouter as Router, Route, Switch, useHistory} from 'react-router-dom';
-import Login from './Login';
-import Search from './Search';
-import AreaPage from './AreaPage'
-import Footer from './Footer';
-import Climbs from './ClimbsPage';
-import Description from './ClimbDescription';
-import FetchLocalAPI from './fetchlocalapi';
+import Login from './Components/Login';
+import Search from './Components/SearchForClimbsPaths/Search';
+import AreaPage from './Components/SearchForClimbsPaths/AreaPage';
+import Footer from './Components/Footer';
+import Climbs from './Components/SearchForClimbsPaths/ClimbsPage';
+import Description from './Components/SearchForClimbsPaths/ClimbDescription';
+import FetchLocalAPI from './Components/APICalls/fetchlocalapi';
 import UserClimbs from './UserClimbs';
 import TestAreaPage from './TestAreaPage';
 

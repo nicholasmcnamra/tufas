@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
-import FetchAPI from "./openbetaapi";
+import FetchAPI from "../APICalls/openbetaapi";
 import Climbs from "./ClimbsPage";
 
 const AreaPage = () => {

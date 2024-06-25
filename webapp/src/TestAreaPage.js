@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useHistory, useLocation } from 'react-router-dom';
 import TestFetchAPI from "./TestApi";
-import Climbs from "./ClimbsPage";
+import Climbs from "./Components/SearchForClimbsPaths/ClimbsPage";
 
 const TestAreaPage = () => {
     const searchVariable = "California"

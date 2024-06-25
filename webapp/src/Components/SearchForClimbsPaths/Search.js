@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory} from 'react-router-dom';
-import FetchAPI from "./openbetaapi";
+import FetchAPI from "../APICalls/openbetaapi";
 import AreaPage from "./AreaPage";
 
 const Search = () => {

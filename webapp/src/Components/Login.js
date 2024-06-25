@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import FetchLocalAPI from './fetchlocalapi';
+import FetchLocalAPI from './APICalls/fetchlocalapi';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
 
