@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 
 const FetchLocalAPI = async (username, password) => {    
   let response;
-  // useEffect(() => {
-  //   const fetchData = async () => {
+
     try {
       response = await fetch("http://localhost:8080/api/login", {
             mode: 'cors',
@@ -23,8 +22,5 @@ const FetchLocalAPI = async (username, password) => {
   catch (error) {
     console.log("Error fetching data", error);
   }};
-
-// }, []);
-// };
 
   export default FetchLocalAPI

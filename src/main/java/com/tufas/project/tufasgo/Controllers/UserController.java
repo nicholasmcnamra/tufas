@@ -22,6 +22,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Date;
 import java.util.Map;
 
 @RestController
@@ -39,9 +40,10 @@ public class UserController {
     private String jwtSecret;
 
     @Autowired
-    public UserController(UserService service, OAuth2AuthorizedClientService clientService) {
+    public UserController(UserService service, OAuth2AuthorizedClientService clientService, PasswordEncoder passwordEncoder) {
         this.service = service;
         this.clientService = clientService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -57,6 +59,7 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/users")
     public ResponseEntity<User> create(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return new ResponseEntity<>(service.create(user), HttpStatus.CREATED);
     }
     @CrossOrigin(origins = "http://localhost:3000")
@@ -111,10 +114,13 @@ public class UserController {
             // Set the authentication object in the SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Generate JWT token
+            Date now = new Date();
+            Date expiryDate = new Date(now.getTime() + 3600000);
+
             String token = Jwts.builder()
                     .setSubject(userDetails.getUsername())
-                    // Set additional claims if needed (e.g., roles)
+                    .setIssuedAt(now)
+                    .setExpiration(expiryDate)
                     .signWith(SignatureAlgorithm.HS512, jwtSecret)
                     .compact();
 

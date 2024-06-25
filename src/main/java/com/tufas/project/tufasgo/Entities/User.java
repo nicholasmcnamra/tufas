@@ -14,6 +14,7 @@ public class User {
     private Long userId;
     private String firstName;
     private String lastName;
+    @Column(name = "username")
     private String userName;
     private String password;
     private String email;
