@@ -17,6 +17,8 @@ const FetchLocalAPI = async (username, password) => {
     
     const data = await response.json();
     console.log("Data received", data);
+    localStorage.setItem('token', data.token);
+    console.log("token: ", data.token);
     return data;
   }
   catch (error) {

@@ -97,11 +97,13 @@ public class SecurityConfiguration  {
                     auth.requestMatchers("/api/**").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/login/oauth2/code/google").permitAll();
                     auth.requestMatchers(HttpMethod.POST, "/login").permitAll();
+                    auth.requestMatchers(HttpMethod.POST, "/").permitAll();
                     auth.anyRequest().authenticated();
 
                 })
                 .oauth2Login(withDefaults())
                 .formLogin(withDefaults())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .build();
     }
 

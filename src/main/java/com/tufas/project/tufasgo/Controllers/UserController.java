@@ -59,6 +59,9 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/users")
     public ResponseEntity<User> create(@RequestBody User user) {
+        if (user.getPassword() == null || user.getUserName() == null || user.getEmail() == null) {
+            return ResponseEntity.badRequest().build();
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return new ResponseEntity<>(service.create(user), HttpStatus.CREATED);
     }

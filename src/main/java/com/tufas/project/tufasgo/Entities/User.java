@@ -14,9 +14,11 @@ public class User {
     private Long userId;
     private String firstName;
     private String lastName;
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String userName;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String email;
     private Instant registeredOn;
     private Instant lastLogin;

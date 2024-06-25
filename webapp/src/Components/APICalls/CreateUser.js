@@ -2,17 +2,18 @@ const CreateUser = async (username, password, email) => {
     let response;
 
     try {
-
         const userData = {
             userName: username,
             password: password,
             email: email
         }
+
+        console.log( userData );
+
         response = await fetch("http://localhost:8080/api/users", {
-            mode: 'cors',
             method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify( { userData } )
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(userData)
         });
 
         if (!response.ok) {

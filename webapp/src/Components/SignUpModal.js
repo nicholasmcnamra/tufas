@@ -11,7 +11,7 @@ const SignUpModal = ({ setOpenModal }) => {
         <Dialog open={true} onClose={handleClosedModal}>
             <DialogTitle>Sign Up</DialogTitle>
             <DialogContent>
-                <SignUp></SignUp>
+                <SignUp setOpenModal={setOpenModal}></SignUp>
             </DialogContent>
         </Dialog>
     )

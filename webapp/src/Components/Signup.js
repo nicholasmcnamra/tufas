@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Grid, TextField } from '@mui/material';
 import CreateUser from "./APICalls/CreateUser";
 
-const SignUp = () => {
+const SignUp = ( { setOpenModal } ) => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [email, setEmail] = useState();
@@ -28,6 +28,7 @@ const SignUp = () => {
 
         CreateUser(username, password, email);
         console.log( username, password, email )
+        setOpenModal(false);
     }
     return (
         <div className="signup-container">
@@ -59,6 +60,7 @@ const SignUp = () => {
                         fullWidth
                         label="Password"
                         name="password"
+                        type="password"
                         value={password}
                         onChange={handleChange}
                         />

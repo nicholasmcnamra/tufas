@@ -2,6 +2,7 @@ import Search from "./SearchForClimbsPaths/Search";
 import Mo from "./Mountain";
 import SignUpModal from "./SignUpModal";
 import { React, useState } from "react";
+import SignUp from "./Signup";
 
 const Navbar = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -17,6 +18,7 @@ const Navbar = () => {
             <a href="/login" className="login">Log in</a>
             <a className="signup" onClick={handleSignUpClick}>Sign Up</a>
             {openModal && <SignUpModal setOpenModal={setOpenModal}></SignUpModal>}
+            
         </nav>
     );
 }
