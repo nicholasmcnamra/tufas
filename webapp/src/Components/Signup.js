@@ -1,13 +1,33 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from '@mui/material';
+import CreateUser from "./APICalls/CreateUser";
 
 const SignUp = () => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [email, setEmail] = useState();
 
-    const handleSubmit = () => {
+    const handleChange = (e) => {
+        switch(e.target.name) {
+            case "username":
+                setUsername(e.target.value);
+                break;
+            case "password":
+                setPassword(e.target.value);
+                break;
+            case "email":
+                setEmail(e.target.value);
+                break;
+            default:
+                break;
+    }
+    }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        CreateUser(username, password, email);
+        console.log( username, password, email )
     }
     return (
         <div className="signup-container">
@@ -19,7 +39,8 @@ const SignUp = () => {
                         fullWidth
                         label="E-mail"
                         name="email"
-                        value=''
+                        value={email}
+                        onChange={handleChange}
                         />
                     </Grid>
 
@@ -28,7 +49,8 @@ const SignUp = () => {
                         fullWidth
                         label="Username"
                         name="username"
-                        value=''
+                        value={username}
+                        onChange={handleChange}
                         />
                     </Grid>
 
@@ -37,7 +59,8 @@ const SignUp = () => {
                         fullWidth
                         label="Password"
                         name="password"
-                        value=''
+                        value={password}
+                        onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
