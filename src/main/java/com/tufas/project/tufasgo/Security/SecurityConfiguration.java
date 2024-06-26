@@ -48,18 +48,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfiguration  {
 
+    @Value("${jwt.secret}")
+    private String secret;
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
     private String clientId;
     @Value("${spring.security.oauth2.client.registration.google.client-secret}")
     private String clientSecret;
-
     @Autowired
     private UserDetailsService userDetailsService;
-
-    @Bean
-    public UserDetailsService userDetailsService(CustomUserDetailsService customUserDetailsService) {
-        return customUserDetailsService;
-    }
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new Argon2PasswordEncoder(16, 32, 8, 4000, 2);
@@ -69,19 +67,14 @@ public class SecurityConfiguration  {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
 
-        return new CorsConfigurationSource() {
-            @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                return configuration;
-            }
-        };
+        return source;
     }
 
     @Bean
@@ -103,7 +96,8 @@ public class SecurityConfiguration  {
                 })
                 .oauth2Login(withDefaults())
                 .formLogin(withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
 
