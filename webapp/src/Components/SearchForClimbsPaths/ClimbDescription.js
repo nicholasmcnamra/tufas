@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 
 const Description = ({ climbs, climbIndex }) => {
-    const [climbToDisplay, setClimbToDisplay] = useState(climbs[climbIndex]);
+    const climbToDisplay = climbs[climbIndex];
     const componentRef = useRef(null);
 
     useEffect(() => {
         if (componentRef.current) {
             componentRef.current.scrollIntoView({behavior: 'smooth'})
-            console.log(true);
         }
     }, [climbToDisplay])
 
-    useEffect(() => {
-        setClimbToDisplay(climbs[climbIndex]);
-        return () => {};
-    }, [climbs, climbIndex]);
+    // useEffect(() => {
+    //     setClimbToDisplay(climbs[climbIndex]);
+    //     return () => {};
+    // }, [climbs, climbIndex]);
 
     if (!climbToDisplay) {
         return <div></div>;

@@ -19,20 +19,14 @@ const AreaPage = () => {
     useEffect(() => {
         if (componentRef.current) {
             componentRef.current.scrollIntoView({ behavior: 'smooth' });
-            console.log(true)
-        }
-        }, [areas]);
+        }}, [areas]);
 
     useEffect(() => {
-        // if searchQuery is not null, Fetch Api using the query result as a parameter
         if (searchQuery) {
             FetchAPI(searchQuery)
                 .then((result) => {
-
-                        setApiResult(result);
-                        console.log(apiResult);
-                        setAreas(result.data.areas[0].children);
-
+                    setApiResult(result);
+                    setAreas(result.data.areas[0].children);
                 })
                 .catch((error) => {
                     setError(error);
@@ -46,20 +40,11 @@ const AreaPage = () => {
 
     const handleClick = async (buttonIndex) => {
         try {
-            // const result = await FetchAPI(searchQuery); // Assuming FetchAPI is an asynchronous function
-            // setApiResult(result);
-            // // Now that apiResult is updated, trigger handleClick
             setClimbIndex(buttonIndex);
             setClimbs(apiResult.data.areas[0].children[buttonIndex].climbs);
         } catch (error) {
             setError(error);
         }
-
-        //need to take index of each button
-        //need to set climbs to the subarray returned by FetchAPI
-        //need to share that data as a prop to ClimbsPage
-        //history.push to ClimbsPage
-        //maybe missing a few steps?
     }
 
     return (
@@ -69,8 +54,7 @@ const AreaPage = () => {
                     <button className="areaitem" onClick={ () => handleClick(index) }> { area.area_name } </button>
                 </div>
             ))}
-            {console.log("Area Page: " + climbs)}
-                        {climbs !== null && <Climbs climbs={climbs} />}
+            {climbs !== null && <Climbs climbs={climbs} />}
         </div>
     );
 };

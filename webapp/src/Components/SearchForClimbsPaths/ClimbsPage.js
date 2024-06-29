@@ -12,9 +12,6 @@ const Climbs = ({ climbs }) => {
         if (Array.isArray(climbs) && climbs.length > 0) {
         setClimbsList(climbs);
         setLoading(false)
-        console.log("Use Effect: " + climbs)
-        {console.log("Number of Climbs: " + climbs.length)}
-        {console.log("Climb: " + climbs[0])}
     }
          else {
         setLoading(false); // Update loading state even if climbs is empty
@@ -23,7 +20,6 @@ const Climbs = ({ climbs }) => {
     useEffect(() => {
         if (componentRef.current) {
             componentRef.current.scrollIntoView({ behavior: 'smooth' });
-            console.log(true)
         }
         }, [climbsList]);
 
@@ -39,8 +35,8 @@ const Climbs = ({ climbs }) => {
     return (
         <div className="climb-preview-box" ref={componentRef}>
             {climbs.map((climb, index) => (
-            <div className="climb-preview-container">
-            <div className="climb-preview" key={index}>
+            <div className="climb-preview-container" key={index}>
+            <div className="climb-preview">
             <button className="climbitem" onClick={ () => handleClick(index)}> {climb.name}</button>
         </div>
         
