@@ -2,23 +2,28 @@ import React, { useState, useEffect, useRef } from 'react';
 import FetchLocalAPI from './APICalls/fetchlocalapi';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
+import { Grid, TextField, Button } from '@mui/material';
 
-const Login= () => {
-  const componentRef = useRef(null);
-
-  // Scroll to the component when it is rendered
-  useEffect(() => {
-    if (componentRef.current) {
-      componentRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, []);
+const Login= ( setOpenLogInModal ) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleChange = (e) => {
+    switch(e.target.name) {
+      case "username":
+        setUsername(e.target.value);
+        break;
+      case "password":
+        setPassword(e.target.value);
+        break;
+      default:
+        break;
+    }
+  }
 
   const handleFormSubmit = async(e) => {
     e.preventDefault();
 
-    
     if (!username || !password) {
       alert('Please fill in both fields.');
       return;
@@ -28,6 +33,7 @@ const Login= () => {
       console.log(username, password);
       console.log(apiResult)
         if (apiResult) 
+          setOpenLogInModal(false);
           console.log(`Welcome back!`)
           return true;
     }
@@ -46,33 +52,40 @@ const handleGoogleLogin = async () => {
 };
 
   return (
-    <div className="login" ref={componentRef}>
-      <h2>Login</h2>
+    <div className="login-container">
       <form onSubmit={ handleFormSubmit }>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
 
-        <div>
-          <label className="username" htmlFor="username">Username:</label>
-          <input className="usernamebox"
-            type="text"
-            id="username"
+            <TextField
+            fullWidth
+            label='Username'
+            name='username'
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+            onChange={handleChange}
+            />
+            </Grid>
 
-        <div>
-          <label className="password" htmlFor="password">Password:</label>
-          <input className="passwordbox"
-            type="password"
-            id="password"
+            <Grid item xs={12}>
+            <TextField
+            fullWidth
+            label='Password'
+            name='password'
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+            onChange={handleChange}
+            />
 
-        <button className="loginbutton" type="submit">Log In</button>
+          </Grid>
+          
+          <Grid item xs={12}>
+            <Button type='submit' variant='contained'>Log In</Button>
+          </Grid>
+          <Grid item xs={12}>
+          <Button onClick={handleGoogleLogin} variant='contained'>Login with Google</Button>
+          </Grid>
+        </Grid>
       </form>
-      <button onClick={handleGoogleLogin}>Login with Google</button>
+      
     </div>
   );
 }

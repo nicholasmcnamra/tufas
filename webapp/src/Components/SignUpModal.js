@@ -1,17 +1,17 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material"
 import SignUp from "./Signup"
 
-const SignUpModal = ({ setOpenModal }) => {
+const SignUpModal = ({ setOpenSignUpModal }) => {
 
     const handleClosedModal = () => {
-        setOpenModal(false);
+        setOpenSignUpModal(false);
     }
 
     return (
         <Dialog open={true} onClose={handleClosedModal}>
             <DialogTitle>Sign Up</DialogTitle>
             <DialogContent>
-                <SignUp setOpenModal={setOpenModal}></SignUp>
+                <SignUp setOpenSignUpModal={setOpenSignUpModal}></SignUp>
             </DialogContent>
         </Dialog>
     )
