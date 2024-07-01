@@ -25,7 +25,7 @@ function App() {
         <Switch>
         <Route exact path="/" component={withImage(Search)}></Route>
           <Route exact path="/login" component={withImage(Login)}></Route>
-          <Route exact path="/arealist" component={withImage(AreaPage)}></Route> 
+          <Route exact path="/arealist" component={AreaPage}></Route> 
           <Route exact path="/climblist" component={withImage(Climbs)}></Route>
           <Route exact path="/climbdescription" component={withImage(Description)}></Route>
           <Route exact path="/fetch8080" component={FetchLocalAPI}></Route>
@@ -42,10 +42,10 @@ function App() {
 const withImage = (Component) => {
   return (props) => (
     <div>
-          <div className="image-container">
-      <img src={"./natgeo.jpeg"} alt="Full Screen Image" /></div>
+      <div className="image-container">
+      <img src={"./natgeo.jpeg"} alt="Full Screen Image" /><Component {...props} /></div>
       <div className="content"></div>
-      <Component {...props} />
+      
     </div>
   )
 }
