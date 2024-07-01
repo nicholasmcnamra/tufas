@@ -21,7 +21,6 @@ function App() {
     <Router>
     <div className="App">
     <Navbar />
-
         <Switch>
         <Route exact path="/" component={withImage(Search)}></Route>
           <Route exact path="/login" component={withImage(Login)}></Route>

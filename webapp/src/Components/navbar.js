@@ -1,8 +1,8 @@
 import Search from "./SearchForClimbsPaths/Search";
-import Mo from "./Mountain";
 import SignUpModal from "./SignUpModal";
 import { React, useState } from "react";
 import SignUp from "./Signup";
+import TufasLogo from "./Mountain";
 
 const Navbar = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -12,11 +12,11 @@ const Navbar = () => {
     };
 
     return (  
-        <nav className="navbar">
-            <Mo className="modiv"/>
-            <a href="/" className="tufaslogo">Tufas</a>
-            <a href="/login" className="login">Log in</a>
-            <a className="signup" onClick={handleSignUpClick}>Sign Up</a>
+        <nav className="navbar" data-testid="navbar-1">
+            <TufasLogo className="modiv"/>
+            <a href="/" className="tufaslogo" data-testid="title-1">Tufas</a>
+            <a href="/login" className="login" data-testid="loginButton-1">Log in</a>
+            <a className="signup" data-testid="signupButton-1" onClick={handleSignUpClick}>Sign Up</a>
             {openModal && <SignUpModal setOpenModal={setOpenModal}></SignUpModal>}
             
         </nav>

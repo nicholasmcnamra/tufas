@@ -1,9 +1,9 @@
 import { ReactComponent as Mountain } from "./mountain.svg"
 
-const Mo = () => {
+const TufasLogo = () => {
     return (
-            <img src={require("./mountain.png")} className="mo" />
+            <img src={require("./mountain.png")} className="mo" data-testid="logo-1" />
     )
 }
 
-export default Mo
+export default TufasLogo;
