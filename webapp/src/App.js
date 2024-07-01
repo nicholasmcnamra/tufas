@@ -7,10 +7,10 @@ import Search from './Components/SearchForClimbsPaths/Search';
 import AreaPage from './Components/SearchForClimbsPaths/AreaPage';
 import Footer from './Components/Footer';
 import Climbs from './Components/SearchForClimbsPaths/ClimbsPage';
-import Description from './Components/SearchForClimbsPaths/ClimbDescription';
 import FetchLocalAPI from './Components/APICalls/fetchlocalapi';
 import UserClimbs from './UserClimbs';
 import TestAreaPage from './TestAreaPage';
+import Description from './Components/SearchForClimbsPaths/ClimbDescription';
 
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
     <Router>
     <div className="App">
     <Navbar />
+
         <Switch>
         <Route exact path="/" component={withImage(Search)}></Route>
           <Route exact path="/login" component={withImage(Login)}></Route>

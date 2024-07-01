@@ -23,4 +23,4 @@ test('should render submit button element in searchbar component', () => {
     const submitButtonElement = screen.getByTestId('submit-1');
     expect(searchbarElement).toContainElement(submitButtonElement);
     expect(submitButtonElement).toHaveTextContent('Find Climbs');
-});
+}); 
