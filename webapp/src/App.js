@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Components/navbar';
 import {  BrowserRouter as Router, Route, Switch, useHistory} from 'react-router-dom';
 import Login from './Components/Login';
@@ -15,12 +15,32 @@ import Description from './Components/SearchForClimbsPaths/ClimbDescription';
 
 function App() {
   const title = "welcome to the new block";
+  
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem('token'));
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+        console.log('Token found, logging in');
+        setLoggedIn(true);
+        
+    }
+    else {
+        setLoggedIn(false);
+    }
+}, [])
+
+function handleLogOut(e) {
+  e.preventDefault();
+  sessionStorage.removeItem('token');
+  setLoggedIn(false);
+} 
 
   return (
     
     <Router>
     <div className="App">
-    <Navbar />
+    <Navbar loggedIn={loggedIn} onLogout={handleLogOut} />
 
         <Switch>
         <Route exact path="/" component={withImage(Search)}></Route>

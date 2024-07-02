@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import FetchLocalAPI from './APICalls/fetchlocalapi';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
 import { Grid, TextField, Button } from '@mui/material';
 
-const Login= ( setOpenLogInModal ) => {
+const Login= ({ setOpenLogInModal }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -31,11 +31,11 @@ const Login= ( setOpenLogInModal ) => {
     else {
       let apiResult = await FetchLocalAPI(username, password);
       console.log(username, password);
-      console.log(apiResult)
+      console.log(apiResult);
+      setOpenLogInModal(false);
         if (apiResult) 
-          setOpenLogInModal(false);
+
           console.log(`Welcome back!`)
-          return true;
     }
 
   };
