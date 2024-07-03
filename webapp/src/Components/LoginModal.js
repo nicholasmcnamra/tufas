@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import Login from "./Login";
 
-const LoginModal = ({ setOpenLogInModal }) => {
+const LoginModal = ({ setOpenLogInModal, setLoggedIn }) => {
 
     const handleCloseModal = () => {
         setOpenLogInModal(false);
@@ -11,7 +11,7 @@ const LoginModal = ({ setOpenLogInModal }) => {
         <Dialog open={true} onClose={handleCloseModal}>
             <DialogTitle>Log In</DialogTitle>
             <DialogContent>
-                <Login setOpenLogInModal={setOpenLogInModal}></Login>
+                <Login setOpenLogInModal={setOpenLogInModal} setLoggedIn={setLoggedIn}></Login>
             </DialogContent>
         </Dialog>
     )

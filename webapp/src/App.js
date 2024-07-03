@@ -17,7 +17,8 @@ function App() {
   const title = "welcome to the new block";
   
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem('token'));
-
+  const [openLogInModal, setOpenLogInModal] = useState(false);
+  
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     if (token) {
@@ -40,11 +41,11 @@ function handleLogOut(e) {
     
     <Router>
     <div className="App">
-    <Navbar loggedIn={loggedIn} onLogout={handleLogOut} />
+    <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} onLogout={handleLogOut} setOpenLogInModal={setOpenLogInModal} openLogInModal={openLogInModal}  />
 
         <Switch>
         <Route exact path="/" component={withImage(Search)}></Route>
-          <Route exact path="/login" component={withImage(Login)}></Route>
+          <Route exact path="/login"><Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} openLogInModal={openLogInModal} setOpenLogInModal={setOpenLogInModal} /></Route>
           <Route exact path="/arealist" component={AreaPage}></Route> 
           <Route exact path="/climblist" component={withImage(Climbs)}></Route>
           <Route exact path="/climbdescription" component={withImage(Description)}></Route>

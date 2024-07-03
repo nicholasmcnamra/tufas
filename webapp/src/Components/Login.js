@@ -4,7 +4,7 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
 import { Grid, TextField, Button } from '@mui/material';
 
-const Login= ({ setOpenLogInModal }) => {
+const Login= ({ setOpenLogInModal, setLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,10 +32,9 @@ const Login= ({ setOpenLogInModal }) => {
       let apiResult = await FetchLocalAPI(username, password);
       console.log(username, password);
       console.log(apiResult);
+      setLoggedIn(true);
       setOpenLogInModal(false);
-        if (apiResult) 
-
-          console.log(`Welcome back!`)
+      console.log(`Welcome back!`)
     }
 
   };

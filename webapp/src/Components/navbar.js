@@ -6,9 +6,8 @@ import TufasLogo from "./Mountain";
 import LoginModal from "./LoginModal";
 import AccountMenu from "./APICalls/AccountMenu";
 
-const Navbar = ({ loggedIn, onLogout }) => {
+const Navbar = ({ loggedIn, setLoggedIn, onLogout, setOpenLogInModal, openLogInModal }) => {
     const [openSignUpModal, setOpenSignUpModal] = useState(false);
-    const [openLogInModal, setOpenLogInModal] = useState(false);
 
     const handleSignUpClick = (e) => {
         e.preventDefault();
@@ -34,7 +33,7 @@ const Navbar = ({ loggedIn, onLogout }) => {
                 </>
             )}
 
-            {openLogInModal && <LoginModal setOpenLogInModal={setOpenLogInModal}></LoginModal>}
+            {openLogInModal && <LoginModal setOpenLogInModal={setOpenLogInModal} setLoggedIn={setLoggedIn}></LoginModal>}
             {openSignUpModal && <SignUpModal setOpenSignUpModal={setOpenSignUpModal}></SignUpModal>}
         </nav>
     );
