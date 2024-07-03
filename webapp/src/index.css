@@ -186,6 +186,16 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   float: right;
 }
+/* 
+.account-menu {
+  display: flex;
+} */
+
+.account-menu-button {
+  position: absolute;
+  margin-right: 50px;
+  right: 0;
+}
 
 .text {
   display: absolute;

@@ -41,7 +41,7 @@ function handleLogOut(e) {
     
     <Router>
     <div className="App">
-    <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} onLogout={handleLogOut} setOpenLogInModal={setOpenLogInModal} openLogInModal={openLogInModal}  />
+    <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} onLogout={handleLogOut} openLogInModal={openLogInModal} setOpenLogInModal={setOpenLogInModal} />
 
         <Switch>
         <Route exact path="/" component={withImage(Search)}></Route>
