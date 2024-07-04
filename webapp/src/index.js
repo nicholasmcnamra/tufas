@@ -5,12 +5,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { UserProvider } from './Components/Authentication/UserContext';
 // const root = //ReactDOM.createRoot(document.getElementById('root'));
 const root = document.getElementById('root'); // <- This is the //correct method call for React version 17
 render(
   <React.StrictMode>
     <Router>
+      <UserProvider>
       <App />
+      </UserProvider>
     </Router>
   </React.StrictMode>, root);
 

@@ -16,13 +16,25 @@ const FetchLocalAPI = async (username, password) => {
     }
     
     const data = await response.json();
-    console.log("Data received", data);
-    sessionStorage.setItem('token', data.token);
-    console.log("token: ", data.token);
+    const token = data.token;
+
+    if (token) {
+      sessionStorage.setItem('user', JSON.stringify(data));
+      console.log("Data received", data);
+      console.log("token: ", data.token);
+    }
     return data;
   }
   catch (error) {
     console.log("Error fetching data", error);
   }};
 
-  export default FetchLocalAPI
+  export const isAuthenticated = () => {
+    const currentUser = sessionStorage.getItem('user');
+    if (!currentUser) {
+      return {}
+    }
+    return JSON.parse(currentUser);
+  }
+
+  export default FetchLocalAPI;

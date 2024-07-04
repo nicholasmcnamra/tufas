@@ -1,9 +1,9 @@
 import Search from "./SearchForClimbsPaths/Search";
-import SignUpModal from "./SignUpModal";
+import SignUpModal from "./Authentication/SignUpModal";
 import { React, useState, useEffect } from "react";
-import SignUp from "./Signup";
+import SignUp from "./Authentication/Signup";
 import TufasLogo from "./Mountain";
-import LoginModal from "./LoginModal";
+import LoginModal from "./Authentication/LoginModal";
 import AccountMenu from "./APICalls/AccountMenu";
 
 const Navbar = ({ loggedIn, setLoggedIn, onLogout, setOpenLogInModal, openLogInModal }) => {

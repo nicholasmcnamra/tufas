@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from '@mui/material';
-import CreateUser from "./APICalls/CreateUser";
+import CreateUser from "../APICalls/CreateUser";
 
 const SignUp = ( { setOpenSignUpModal } ) => {
     const [username, setUsername] = useState();

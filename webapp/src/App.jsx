@@ -1,8 +1,8 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Navbar from './Components/navbar';
 import {  BrowserRouter as Router, Route, Switch, useHistory, useLocation } from 'react-router-dom';
-import Login from './Components/Login';
+import Login from './Components/Authentication/Login';
 import Search from './Components/SearchForClimbsPaths/Search';
 import AreaPage from './Components/SearchForClimbsPaths/AreaPage';
 import Footer from './Components/Footer';
@@ -11,12 +11,14 @@ import FetchLocalAPI from './Components/APICalls/fetchlocalapi';
 import UserClimbs from './UserClimbs';
 import TestAreaPage from './TestAreaPage';
 import Description from './Components/SearchForClimbsPaths/ClimbDescription';
+import UserContext, { UserProvider } from './Components/Authentication/UserContext';
 
 
 function App() {
   const title = "welcome to the new block";
   const history = useHistory();
   const location = useLocation();
+  const [currentUser, setCurrentUser] = useContext(UserContext);
 
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem('token'));
   const [openLogInModal, setOpenLogInModal] = useState(false);
@@ -35,11 +37,12 @@ function App() {
 
 function handleLogOut(e) {
   e.preventDefault();
-  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('user');
   setLoggedIn(false);
   history.push("/");
   console.log(history);
 } 
+
 
   return (
     <div className="App">
@@ -52,7 +55,9 @@ function handleLogOut(e) {
           <Route exact path="/climblist" component={withImage(Climbs)}></Route>
           <Route exact path="/climbdescription" component={withImage(Description)}></Route>
           <Route exact path="/fetch8080" component={FetchLocalAPI}></Route>
+          <UserProvider>
           <Route exact path="/userclimbs" component={UserClimbs}></Route>
+          </UserProvider>
           <Route exact path="/TestAreaPage" component={TestAreaPage}></Route>
         </Switch>
 

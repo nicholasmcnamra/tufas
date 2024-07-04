@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FetchLocalAPI from './APICalls/fetchlocalapi';
+import FetchLocalAPI from '../APICalls/fetchlocalapi';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
 import { Grid, TextField, Button } from '@mui/material';
@@ -33,11 +33,15 @@ const Login= ({ setOpenLogInModal, setLoggedIn }) => {
     }
     else {
       let apiResult = await FetchLocalAPI(username, password);
-      console.log(username, password);
-      console.log(apiResult);
-      setLoggedIn(true);
-      setOpenLogInModal(false);
-      console.log(`Welcome back!`)
+      if (apiResult) {
+        console.log(username, password);
+        setLoggedIn(true);
+        setOpenLogInModal(false);
+        console.log(`Welcome back!`)
+      }
+      else {
+        alert('Your username or password does not match what we have on record.')
+      }
     }
 
   };
