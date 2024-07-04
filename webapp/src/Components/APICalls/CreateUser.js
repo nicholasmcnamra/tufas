@@ -1,11 +1,13 @@
-const CreateUser = async (username, password, email) => {
+const CreateUser = async (username, password, email, firstname, lastname) => {
     let response;
 
     try {
         const userData = {
             userName: username,
             password: password,
-            email: email
+            email: email,
+            firstName: firstname,
+            lastName: lastname
         }
 
         console.log( userData );

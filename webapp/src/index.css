@@ -176,6 +176,10 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.login-field-container {
+  padding: 10px !important;
+}
+
 .password-field {
   position: relative;
 }
@@ -202,6 +206,11 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   float: right;
 }
+
+.sign-up-field-container {
+  padding: 10px !important;
+}
+
 /* 
 .account-menu {
   display: flex;

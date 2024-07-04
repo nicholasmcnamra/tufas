@@ -10,7 +10,7 @@ const LoginModal = ({ setOpenLogInModal, setLoggedIn }) => {
     return (
         <Dialog open={true} onClose={handleCloseModal}>
             <DialogTitle>Log In</DialogTitle>
-            <DialogContent>
+            <DialogContent className="login-field-container">
                 <Login setOpenLogInModal={setOpenLogInModal} setLoggedIn={setLoggedIn}></Login>
             </DialogContent>
         </Dialog>

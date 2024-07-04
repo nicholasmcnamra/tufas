@@ -6,6 +6,8 @@ const SignUp = ( { setOpenSignUpModal } ) => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [email, setEmail] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
 
     const handleChange = (e) => {
         switch(e.target.name) {
@@ -18,6 +20,12 @@ const SignUp = ( { setOpenSignUpModal } ) => {
             case "email":
                 setEmail(e.target.value);
                 break;
+            case "firstname":
+                setFirstName(e.target.value);
+                break;
+            case "lastname":
+                setLastName(e.target.value);
+                break;
             default:
                 break;
     }
@@ -26,14 +34,34 @@ const SignUp = ( { setOpenSignUpModal } ) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        CreateUser(username, password, email);
+        CreateUser(username, password, email, firstName, lastName);
         console.log( username, password, email )
         setOpenSignUpModal(false);
     }
     return (
         <div className="signup-container">
             <form onSubmit={handleSubmit}>
-                <Grid container spacing={2}>
+                <Grid container spacing={5}>
+
+                    <Grid item xs={12}>
+                        <TextField
+                        fullWidth
+                        label="First Name"
+                        name="firstname"
+                        value={firstName}
+                        onChange={handleChange}
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                        fullWidth
+                        label="Last Name"
+                        name="lastname"
+                        value={lastName}
+                        onChange={handleChange}
+                        />
+                    </Grid>
 
                     <Grid item xs={12}>
                         <TextField

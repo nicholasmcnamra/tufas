@@ -10,7 +10,7 @@ const SignUpModal = ({ setOpenSignUpModal }) => {
     return (
         <Dialog open={true} onClose={handleClosedModal}>
             <DialogTitle>Sign Up</DialogTitle>
-            <DialogContent>
+            <DialogContent className="sign-up-field-container">
                 <SignUp setOpenSignUpModal={setOpenSignUpModal}></SignUp>
             </DialogContent>
         </Dialog>
