@@ -3,10 +3,13 @@ import FetchLocalAPI from './APICalls/fetchlocalapi';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
 import { Grid, TextField, Button } from '@mui/material';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
 const Login= ({ setOpenLogInModal, setLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [visible, setVisible] = useState(false);
 
   const handleChange = (e) => {
     switch(e.target.name) {
@@ -66,18 +69,23 @@ const handleGoogleLogin = async () => {
             </Grid>
 
             <Grid item xs={12}>
+            <div className="password-field">
             <TextField
             fullWidth
             label='Password'
             name='password'
+            type={visible ? 'text' : 'password'}
             value={password}
             onChange={handleChange}
-            />
-
+            ></TextField>
+            <div className="password-visible" onClick={ () => setVisible(!visible)}>
+              {visible ? <VisibilityOutlinedIcon className='visible-icon'/> : <VisibilityOffOutlinedIcon className='visible-icon'/>}
+            </div>
+            </div>
           </Grid>
           
           <Grid item xs={12}>
-            <Button type='submit' variant='contained'>Log In</Button>
+            <Button type='submit' variant='contained' className='login-button'>Log In</Button>
           </Grid>
           <Grid item xs={12}>
           <Button onClick={handleGoogleLogin} variant='contained'>Login with Google</Button>

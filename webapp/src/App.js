@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Navbar from './Components/navbar';
-import {  BrowserRouter as Router, Route, Switch, useHistory} from 'react-router-dom';
+import {  BrowserRouter as Router, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Login from './Components/Login';
 import Search from './Components/SearchForClimbsPaths/Search';
 import AreaPage from './Components/SearchForClimbsPaths/AreaPage';
@@ -15,7 +15,9 @@ import Description from './Components/SearchForClimbsPaths/ClimbDescription';
 
 function App() {
   const title = "welcome to the new block";
-  
+  const history = useHistory();
+  const location = useLocation();
+
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem('token'));
   const [openLogInModal, setOpenLogInModal] = useState(false);
   
@@ -35,11 +37,11 @@ function handleLogOut(e) {
   e.preventDefault();
   sessionStorage.removeItem('token');
   setLoggedIn(false);
+  history.push("/");
+  console.log(history);
 } 
 
   return (
-    
-    <Router>
     <div className="App">
     <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} onLogout={handleLogOut} openLogInModal={openLogInModal} setOpenLogInModal={setOpenLogInModal} />
 
@@ -56,7 +58,6 @@ function handleLogOut(e) {
 
       {/* <Footer /> */}
     </div>
-    </Router>
   );
 }
 

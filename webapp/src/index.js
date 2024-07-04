@@ -4,11 +4,14 @@ import { render } from 'react-dom'; // <- This is the correct import // statemen
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
 // const root = //ReactDOM.createRoot(document.getElementById('root'));
 const root = document.getElementById('root'); // <- This is the //correct method call for React version 17
 render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>, root);
 
 // If you want to start measuring performance in your app, pass a function
