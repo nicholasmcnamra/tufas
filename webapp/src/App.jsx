@@ -7,7 +7,7 @@ import Search from './Components/SearchForClimbsPaths/Search';
 import AreaPage from './Components/SearchForClimbsPaths/AreaPage';
 import Footer from './Components/Footer';
 import Climbs from './Components/SearchForClimbsPaths/ClimbsPage';
-import FetchLocalAPI from './Components/APICalls/fetchlocalapi';
+import UserLogin from './Components/APICalls/UserLogin';
 import UserClimbs from './UserClimbs';
 import TestAreaPage from './TestAreaPage';
 import Description from './Components/SearchForClimbsPaths/ClimbDescription';
@@ -43,7 +43,6 @@ function handleLogOut(e) {
   console.log(history);
 } 
 
-
   return (
     <div className="App">
     <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} onLogout={handleLogOut} openLogInModal={openLogInModal} setOpenLogInModal={setOpenLogInModal} />
@@ -54,7 +53,7 @@ function handleLogOut(e) {
           <Route exact path="/arealist" component={AreaPage}></Route> 
           <Route exact path="/climblist" component={withImage(Climbs)}></Route>
           <Route exact path="/climbdescription" component={withImage(Description)}></Route>
-          <Route exact path="/fetch8080" component={FetchLocalAPI}></Route>
+          <Route exact path="/fetch8080" component={UserLogin}></Route>
           <UserProvider>
           <Route exact path="/userclimbs" component={UserClimbs}></Route>
           </UserProvider>

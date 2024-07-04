@@ -6,6 +6,7 @@ let query = ` query GetGunks($searchArea: String!)
     children {
       area_name 
       climbs {
+        id
         name 
         grades {
             vscale
@@ -15,7 +16,11 @@ let query = ` query GetGunks($searchArea: String!)
             location
             protection
         }
-      }  
+      } 
+      metadata {
+        lat
+        lng
+      } 
     }
 
   }}`;

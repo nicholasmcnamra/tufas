@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import Login from "./Login";
-import { isAuthenticated } from "../APICalls/fetchlocalapi";
+import { isAuthenticated } from "../APICalls/UserLogin";
 
 const UserContext = createContext();
 

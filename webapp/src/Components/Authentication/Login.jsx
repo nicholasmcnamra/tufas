@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import FetchLocalAPI from '../APICalls/fetchlocalapi';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
 import { Grid, TextField, Button } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import UserLogin from '../APICalls/UserLogin';
 
 const Login= ({ setOpenLogInModal, setLoggedIn }) => {
   const [username, setUsername] = useState('');
@@ -32,7 +32,7 @@ const Login= ({ setOpenLogInModal, setLoggedIn }) => {
       return;
     }
     else {
-      let apiResult = await FetchLocalAPI(username, password);
+      let apiResult = await UserLogin(username, password);
       if (apiResult) {
         console.log(username, password);
         setLoggedIn(true);

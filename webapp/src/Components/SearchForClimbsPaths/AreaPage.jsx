@@ -35,6 +35,7 @@ const AreaPage = ({ result }) => {
             setError(error);
         }
     }
+    console.log(areas);
 
     return (
         <div className="area-list" ref={componentRef}>

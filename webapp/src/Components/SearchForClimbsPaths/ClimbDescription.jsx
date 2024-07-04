@@ -18,6 +18,7 @@ const Description = ({ climbs, climbIndex }) => {
     if (!climbToDisplay) {
         return <div></div>;
     }
+    console.log(climbToDisplay);
 
     return (
         <div className="description-container" ref={componentRef}>

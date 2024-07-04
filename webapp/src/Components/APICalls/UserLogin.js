@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const FetchLocalAPI = async (username, password) => {    
+const UserLogin = async (username, password) => {    
   let response;
 
     try {
@@ -37,4 +37,4 @@ const FetchLocalAPI = async (username, password) => {
     return JSON.parse(currentUser);
   }
 
-  export default FetchLocalAPI;
+  export default UserLogin;
