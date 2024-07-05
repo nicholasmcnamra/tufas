@@ -117,6 +117,8 @@ public class UserController {
             // Set the authentication object in the SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            User currentUser = service.findByUsername(username);
+
             Date now = new Date();
             Date expiryDate = new Date(now.getTime() + 3600000);
 
@@ -128,7 +130,7 @@ public class UserController {
                     .compact();
 
             // Create JwtTokenResponse object
-            JwtTokenResponse tokenResponse = new JwtTokenResponse(token, "Bearer");
+            JwtTokenResponse tokenResponse = new JwtTokenResponse(token, "Bearer", currentUser.getUserId(), currentUser.getUserName(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getEmail());
 
             // Return JwtTokenResponse in response body
             return ResponseEntity.ok(tokenResponse);

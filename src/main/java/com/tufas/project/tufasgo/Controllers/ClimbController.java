@@ -7,7 +7,10 @@ import com.tufas.project.tufasgo.Services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/api")
 @RestController
@@ -28,7 +31,7 @@ public class ClimbController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/climb/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Climb> show(@PathVariable Long id) {
+    public ResponseEntity<Climb> show(@PathVariable String id) {
         return new ResponseEntity<>(service.show(id), HttpStatus.OK);
     }
 
@@ -42,14 +45,30 @@ public class ClimbController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/climb/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Climb> update(@PathVariable Long id, @RequestBody Climb climb) {
+    public ResponseEntity<Climb> update(@PathVariable String id, @RequestBody Climb climb) {
         return new ResponseEntity<>(service.update(id, climb), HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/climb/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
+    public ResponseEntity<Boolean> destroy(@PathVariable String id) {
         return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/{climbId}/addUserClimb/{userId}")
+    @PreAuthorize("isAuthenticated")
+    public ResponseEntity<List<User>> addUserToClimbLog(@PathVariable String climbId, @PathVariable Long userId) {
+        try {
+            Climb climb = service.addUserToClimbLog(climbId, userId);
+            return new ResponseEntity<>(climb.getClimbLog(), HttpStatus.OK);
+        }
+        catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -1,5 +1,9 @@
 package com.tufas.project.tufasgo.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import java.time.Instant;
@@ -8,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +27,7 @@ public class User {
     private String email;
     private Instant registeredOn;
     private Instant lastLogin;
-    @ManyToMany
-    @JoinTable(name = "userClimbs", joinColumns = @JoinColumn(name="userId", referencedColumnName = "userId"),
-            inverseJoinColumns = @JoinColumn(name="climbId", referencedColumnName = "climbId"))
+    @ManyToMany (mappedBy = "climbLog", cascade = CascadeType.ALL)
     private List<Climb> userClimbs;
 
 

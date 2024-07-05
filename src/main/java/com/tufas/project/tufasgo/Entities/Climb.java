@@ -1,25 +1,26 @@
 package com.tufas.project.tufasgo.Entities;
 
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
+
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "climbId")
 public class Climb {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long climbId;
+    private String climbId;
     private String climbName;
     private String climbType;
     private String climbGrade;
     private Double latitude;
     private Double longitude;
-    @ManyToMany
-    @JoinTable(name = "climbsByUsers", joinColumns = @JoinColumn(name="climbId", referencedColumnName = "climbId"),
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "climbs_by_users", joinColumns = @JoinColumn(name="climbId", referencedColumnName = "climbId"),
     inverseJoinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"))
     private List<User> climbLog;
 
-    public Climb(Long climbId, String climbName, String climbType, String climbGrade, Double latitude, Double longitude, List<User> climbLog) {
+    public Climb(String climbId, String climbName, String climbType, String climbGrade, Double latitude, Double longitude, List<User> climbLog) {
         this.climbId = climbId;
         this.climbName = climbName;
         this.climbType = climbType;
@@ -41,11 +42,11 @@ public class Climb {
     public Climb() {
     }
 
-    public Long getClimbId() {
+    public String getClimbId() {
         return climbId;
     }
 
-    public void setClimbId(Long climbId) {
+    public void setClimbId(String climbId) {
         this.climbId = climbId;
     }
 
