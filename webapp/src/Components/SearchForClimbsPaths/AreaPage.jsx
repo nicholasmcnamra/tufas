@@ -3,6 +3,8 @@ import Climbs from "./ClimbsPage";
 
 const AreaPage = ({ result }) => {
     const [areas, setAreas] = useState([]);
+    const [specificArea, setSpecificArea] = useState([]);
+    const [climbLogAreas, setClimbLogAreas] = useState([]);
     const [error, setError] = useState(null);
     const [climbs, setClimbs] = useState([]);
     const componentRef = useRef(null);
@@ -16,7 +18,8 @@ const AreaPage = ({ result }) => {
     useEffect(() => {
         if(result) {
             try {
-                setAreas(result.data.areas[0].children)
+                setAreas(result.data.areas[0].children);
+                setClimbLogAreas(result.data.areas[0]);
             }
             catch(error) {
                 setError(error);
@@ -31,11 +34,11 @@ const AreaPage = ({ result }) => {
     const handleClick = async (buttonIndex) => {
         try {
             setClimbs(result.data.areas[0].children[buttonIndex].climbs);
+            setSpecificArea(result.data.areas[0].children[buttonIndex]);
         } catch (error) {
             setError(error);
         }
     }
-    console.log(areas);
 
     return (
         <div className="area-list" ref={componentRef}>
@@ -44,7 +47,7 @@ const AreaPage = ({ result }) => {
                     <button className="areaitem" onClick={ () => handleClick(index) }> { area.area_name } </button>
                 </div>
             ))}
-            {climbs !== null && <Climbs climbs={climbs} />}
+            {climbs !== null && <Climbs climbs={climbs} specificArea={specificArea} generalArea={climbLogAreas} />}
         </div>
     );
 };

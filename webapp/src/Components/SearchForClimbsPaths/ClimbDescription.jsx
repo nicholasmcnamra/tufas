@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import LogClimbButton from "./ClimbActions/LogClimb";
 
-const Description = ({ climbs, climbIndex }) => {
+const Description = ({ climbs, climbIndex, specificArea, generalArea }) => {
     const climbToDisplay = climbs[climbIndex];
     const componentRef = useRef(null);
 
@@ -18,7 +19,8 @@ const Description = ({ climbs, climbIndex }) => {
     if (!climbToDisplay) {
         return <div></div>;
     }
-    console.log(climbToDisplay);
+
+    console.log(specificArea);
 
     return (
         <div className="description-container" ref={componentRef}>
@@ -31,7 +33,7 @@ const Description = ({ climbs, climbIndex }) => {
                 <p className="protection">{climbToDisplay.content.protection}</p>
             </div>
                 <div className="button-container">
-                <button className="log-climb">Log Climb</button>
+                <LogClimbButton generalArea={generalArea} specificArea={specificArea} climb={climbToDisplay} />
                 <button className="add-media">Add Media</button>
                 <button className="map">Map</button>
                 </div>

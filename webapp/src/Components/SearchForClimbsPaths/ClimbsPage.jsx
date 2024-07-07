@@ -1,9 +1,9 @@
 import { useRef, useEffect, useState } from "react"
 import Description from "./ClimbDescription";
 
-const Climbs = ({ climbs }) => {
+const Climbs = ({ climbs, specificArea, generalArea }) => {
     const [climbsList, setClimbsList] = useState([]);
-    const [climbIndex, setClimbIndex] = useState([]);
+    const [climbIndex, setClimbIndex] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const componentRef = useRef(null);
@@ -29,8 +29,10 @@ const Climbs = ({ climbs }) => {
 
     const handleClick = (buttonIndex) => {      
             setClimbIndex(buttonIndex);
+            console.log(buttonIndex);
     }
 
+    console.log(climbs, climbIndex);
 
     return (
         <div className="climb-preview-box" ref={componentRef}>
@@ -42,7 +44,7 @@ const Climbs = ({ climbs }) => {
         
         </div>
         ))}
-        <div className="descriptionarea"><Description climbs={ climbs } climbIndex= {climbIndex }/></div>
+        <div className="descriptionarea"><Description climbs={ climbs } specificArea={specificArea} generalArea={generalArea} climbIndex= {climbIndex }/></div>
         </div>
         
         
