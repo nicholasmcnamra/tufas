@@ -1,6 +1,7 @@
 package com.tufas.project.tufasgo.Controllers;
 
 import com.tufas.project.tufasgo.Entities.Climb;
+import com.tufas.project.tufasgo.Entities.ClimbRequestArea;
 import com.tufas.project.tufasgo.Entities.User;
 import com.tufas.project.tufasgo.Services.ClimbService;
 import com.tufas.project.tufasgo.Services.UserService;
@@ -37,6 +38,7 @@ public class ClimbController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/climbs")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Climb> create(@RequestBody Climb climb) {
         return new ResponseEntity<>(service.create(climb), HttpStatus.CREATED);
     }
@@ -58,9 +60,9 @@ public class ClimbController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{climbId}/addUserClimb/{userId}")
     @PreAuthorize("isAuthenticated")
-    public ResponseEntity<List<User>> addUserToClimbLog(@PathVariable String climbId, @PathVariable Long userId) {
+    public ResponseEntity<List<User>> addUserToClimbLog(@PathVariable String climbId, @PathVariable Long userId, @RequestBody ClimbRequestArea area) {
         try {
-            Climb climb = service.addUserToClimbLog(climbId, userId);
+            Climb climb = service.addUserToClimbLog(climbId, userId, area.getArea());
             return new ResponseEntity<>(climb.getClimbLog(), HttpStatus.OK);
         }
         catch (RuntimeException e) {

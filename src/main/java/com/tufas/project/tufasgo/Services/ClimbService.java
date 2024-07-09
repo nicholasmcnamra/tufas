@@ -46,7 +46,7 @@ public class ClimbService {
         return true;
     }
 
-    public Climb addUserToClimbLog(String climbId, Long userId) {
+    public Climb addUserToClimbLog(String climbId, Long userId, String area) {
         Optional<Climb> climbOptional = repository.findById(climbId);
         Optional<User> userOptional = userRepository.findById(userId);
 

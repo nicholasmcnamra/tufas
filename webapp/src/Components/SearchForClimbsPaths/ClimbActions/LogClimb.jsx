@@ -1,6 +1,11 @@
-import LogUserClimbs from "../../APICalls/LogUserClimbs";
+import CreateClimb from "../../APICalls/CreateClimb";
+import LogClimbByUser from "../../APICalls/LogClimb_By_User";
 
 const LogClimbButton = ( {generalArea, specificArea, climb} ) => {
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    const userId = userData.userId;
+    const climbId = climb.id;
+    const area = generalArea.area_name;
 
     const handleLogClimbClick = async (e) => {
         e.preventDefault();
@@ -13,7 +18,9 @@ const LogClimbButton = ( {generalArea, specificArea, climb} ) => {
     }
 
     try {
-        LogUserClimbs(generalArea, specificArea, climb);
+        await CreateClimb(generalArea, specificArea, climb);
+        console.log(`userId: ${userId}\nclimbId: ${climbId}\narea: ${area}`);
+        await LogClimbByUser(userId, climbId, area);
     }
     catch (error) {
         console.log("Error logging climb ", error);
