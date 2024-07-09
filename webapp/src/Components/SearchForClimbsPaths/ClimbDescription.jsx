@@ -20,8 +20,6 @@ const Description = ({ climbs, climbIndex, specificArea, generalArea }) => {
         return <div></div>;
     }
 
-    console.log(specificArea);
-
     return (
         <div className="description-container" ref={componentRef}>
             <div className="description-preview-box">

@@ -37,7 +37,6 @@ public class ClimbController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/climbs")
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Climb> create(@RequestBody Climb climb) {
         return new ResponseEntity<>(service.create(climb), HttpStatus.CREATED);
     }

@@ -90,6 +90,7 @@ public class SecurityConfiguration  {
                     auth.requestMatchers("/api/**").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/login/oauth2/code/google").permitAll();
                     auth.requestMatchers(HttpMethod.POST, "/login").permitAll();
+                    auth.requestMatchers(HttpMethod.POST, "/climbs").permitAll();
                     auth.requestMatchers(HttpMethod.POST, "/").permitAll();
                     auth.anyRequest().authenticated();
 
