@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import axios from 'axios';
+// import axios from 'axios';
 import { Grid, TextField, Button } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
@@ -10,6 +10,7 @@ const Login= ({ setOpenLogInModal, setLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
+  const axios = require('axios').default;
 
   const handleChange = (e) => {
     switch(e.target.name) {

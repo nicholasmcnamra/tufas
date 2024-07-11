@@ -8,7 +8,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long climbId;
+    private String climbId;
     private String message;
     private Instant created;
     private Instant updated;
@@ -16,7 +16,7 @@ public class Comment {
     @JoinColumn(name= "sender_id", referencedColumnName = "userId")
     private User sender;
 
-    public Comment(Long id, Long climbId, String message, Instant created, Instant updated, User sender) {
+    public Comment(Long id, String climbId, String message, Instant created, Instant updated, User sender) {
         this.id = id;
         this.climbId = climbId;
         this.message = message;
@@ -25,7 +25,7 @@ public class Comment {
         this.sender = sender;
     }
 
-    public Comment(Long climbId, String message, Instant created, Instant updated, User sender) {
+    public Comment(String climbId, String message, Instant created, Instant updated, User sender) {
         this.climbId = climbId;
         this.message = message;
         this.created = created;
@@ -44,11 +44,11 @@ public class Comment {
         this.id = id;
     }
 
-    public Long getClimbId() {
+    public String getClimbId() {
         return climbId;
     }
 
-    public void setClimbId(Long climbId) {
+    public void setClimbId(String climbId) {
         this.climbId = climbId;
     }
 

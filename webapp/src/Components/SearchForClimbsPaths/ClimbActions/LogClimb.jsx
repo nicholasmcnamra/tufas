@@ -28,9 +28,9 @@ const LogClimbButton = ( {generalArea, specificArea, climb} ) => {
     }
 
     return (
-        <div className="log-climb-button-container">
+
             <button className="log-climb" onClick={handleLogClimbClick}>Log Climb</button>
-        </div>
+
     )
 }
 
