@@ -1,9 +1,10 @@
 import CreateClimb from "../../APICalls/CreateClimb";
 import LogClimbByUser from "../../APICalls/LogClimb_By_User";
+import { useState } from "react";
 
 const LogClimbButton = ( {generalArea, specificArea, climb} ) => {
     const userData = JSON.parse(sessionStorage.getItem('user'));
-    const userId = userData.userId;
+    const [userId, setUserId] = useState(''); 
     const climbId = climb.id;
     const area = generalArea.area_name;
 
@@ -18,6 +19,7 @@ const LogClimbButton = ( {generalArea, specificArea, climb} ) => {
     }
 
     try {
+        setUserId(userData.userId);
         await CreateClimb(generalArea, specificArea, climb);
         console.log(`userId: ${userId}\nclimbId: ${climbId}\narea: ${area}`);
         await LogClimbByUser(userId, climbId, area);

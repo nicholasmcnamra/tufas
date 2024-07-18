@@ -1,9 +1,12 @@
+import {headerWithAuthentication} from './HeaderVariables';
+
 const CreateClimb = async ( generalArea, specificArea, climb ) => {
     let response;
     const userData = JSON.parse(sessionStorage.getItem('user'));
     const token = `Bearer ${userData.token}`;
     console.log(userData, token);
     console.log("Token: ", token);
+
     const climbData = {
         climbId: climb.id,
         area: generalArea.area_name,
@@ -18,15 +21,10 @@ const CreateClimb = async ( generalArea, specificArea, climb ) => {
     }
     console.log("Climb Data: ", climbData);
 
+    const requestHeaders = headerWithAuthentication(token, climbData);
+
     return new Promise((resolve, reject) => {
-        fetch("http://localhost:8080/api/climbs", {
-            mode: 'cors',
-            method: 'POST',
-            headers: {'Content-Type':'application/json',
-                    'Authorization' : token
-            },
-            body: JSON.stringify(climbData)
-        })
+        fetch("http://localhost:8080/api/climbs", requestHeaders)
         .then(response => {
             if (response.ok) {
                 resolve(response.json());
