@@ -9,8 +9,8 @@ import com.tufas.project.tufasgo.Security.JwtRequestFilter;
 import com.tufas.project.tufasgo.Services.ClimbService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -25,8 +25,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @WebMvcTest(ClimbController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class ClimbControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -53,11 +53,24 @@ public class ClimbControllerTest {
         when(climbService.create(any(Climb.class))).thenReturn(climb);
         when(climbService.addUserToClimbLog(anyString(), anyLong(), anyString())).thenReturn(climb);
 
-        mockMvc.perform(post("/climbs/createAndAddUser")
-                .param("userId", "1")
+        mockMvc.perform(post("/api/climbs/createAndAddUser")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\" : \"Test Climb\", \"area\" : \"Test Area\"}"))
-                .andExpect(status().isCreated())
+                .content("{"
+                        + "\"climb\": {"
+                        + "\"climbId\": \"45rjfw-84ndf-19shf-72fbe\","
+                        + "\"climbName\": \"Test Climb\","
+                        + "\"area\": \"Test Area\","
+                        + "\"areaName\": \"Test Area Name\","
+                        + "\"climbType\": \"Sport\","
+                        + "\"climbDescription\": null,"
+                        + "\"gradeType\": \"5.--\","
+                        + "\"climbGrade\": \"5.10\","
+                        + "\"latitude\": 45.0,"
+                        + "\"longitude\": -123.0"
+                        + "},"
+                        + "\"userId\": 1"
+                        + "}"))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(userList.size()));
     }
 }
