@@ -3,11 +3,17 @@ package com.tufas.project.tufasgo.controllerTest;
 import com.tufas.project.tufasgo.Controllers.ClimbController;
 import com.tufas.project.tufasgo.Entities.Climb;
 import com.tufas.project.tufasgo.Entities.User;
+import com.tufas.project.tufasgo.Repositories.UserRepository;
+import com.tufas.project.tufasgo.Security.CustomUserDetailsService;
+import com.tufas.project.tufasgo.Security.JwtRequestFilter;
 import com.tufas.project.tufasgo.Services.ClimbService;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
@@ -26,7 +32,17 @@ public class ClimbControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private ClimbService climbService;
+    @MockBean
+    private UserRepository userRepository;
 
+    @MockBean
+    private JwtRequestFilter jwtRequestFilter;
+
+    @MockBean
+    private CustomUserDetailsService customUserDetailsService;
+
+    @Test
+    @WithMockUser(roles = "USER")
     public void createClimbAddUserTest() throws Exception {
         Climb climb = new Climb();
         climb.setClimbId("45rjfw-84ndf-19shf-72fbe");

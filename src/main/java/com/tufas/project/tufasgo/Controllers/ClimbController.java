@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.beans.Transient;
 import java.util.List;
 
 @RequestMapping("/api")
@@ -69,6 +71,24 @@ public class ClimbController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @PostMapping("/climbs/createAndAddUser")
+    @PreAuthorize("isAuthenticated()")
+    @Transactional
+    public ResponseEntity<List<User>> addClimbAndUser(@RequestBody Climb climb, @RequestParam Long userId, @RequestBody ClimbRequestArea area) {
+        try {
+            Climb newClimb = service.create(climb);
+            Climb climbLog = service.addUserToClimbLog(newClimb.getClimbId(), userId, area.getArea());
+            return new ResponseEntity<>(climbLog.getClimbLog(), HttpStatus.OK);
+        }
+        catch (RuntimeException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

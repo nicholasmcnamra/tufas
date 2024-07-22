@@ -55,7 +55,7 @@ public class SecurityConfiguration  {
     @Value("${spring.security.oauth2.client.registration.google.client-secret}")
     private String clientSecret;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
     @Bean
@@ -89,6 +89,7 @@ public class SecurityConfiguration  {
                 .authorizeHttpRequests( auth -> {
                     auth.requestMatchers("/api/**").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/login/oauth2/code/google").permitAll();
+                    auth.requestMatchers(HttpMethod.POST, "/climbs/createAndAddUser").hasRole("USER");
                     auth.requestMatchers(HttpMethod.POST, "/login").permitAll();
                     auth.requestMatchers(HttpMethod.POST, "/climbs").permitAll();
                     auth.requestMatchers(HttpMethod.POST, "/").permitAll();
@@ -105,7 +106,7 @@ public class SecurityConfiguration  {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsService(customUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
