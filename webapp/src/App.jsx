@@ -19,28 +19,29 @@ function App() {
   const history = useHistory();
   const location = useLocation();
   const [currentUser, setCurrentUser] = useContext(UserContext);
-
-  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem('token'));
+  const [loggedIn, setLoggedIn] = useState(false);
   const [openLogInModal, setOpenLogInModal] = useState(false);
+  const [userData, setUserData] = useState({});
+  const [token, setToken] = useState('');
   
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
+    setUserData(JSON.parse(sessionStorage.getItem('user')));
+    setToken(userData.token);
     if (token) {
         console.log('Token found, logging in');
         setLoggedIn(true);
-        
+        console.log(loggedIn);
     }
     else {
         setLoggedIn(false);
     }
-}, [])
+}, []);
 
 function handleLogOut(e) {
   e.preventDefault();
   sessionStorage.removeItem('user');
   setLoggedIn(false);
   history.push("/");
-  console.log(history);
 } 
 
   return (

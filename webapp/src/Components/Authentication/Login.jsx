@@ -51,7 +51,6 @@ const handleGoogleLogin = async () => {
   try {
     // Make a request to the backend server to initiate the Google OAuth2 flow
     const response = await axios.get('http://localhost:8080/login');
-    console.log(response.url);
     document.location = response.url;
   } catch (error) {
     console.error('Error initiating Google login:', error);

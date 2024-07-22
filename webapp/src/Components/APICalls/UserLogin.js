@@ -10,7 +10,7 @@ const UserLogin = async (username, password) => {
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({username, password})
     });
-    console.log(response);
+    
     if (!response.ok) {
       throw new Error("Network response not okay");
     }
@@ -20,8 +20,6 @@ const UserLogin = async (username, password) => {
 
     if (token) {
       sessionStorage.setItem('user', JSON.stringify(data));
-      console.log("Data received", data);
-      console.log("token: ", data.token);
     }
     return data;
   }
