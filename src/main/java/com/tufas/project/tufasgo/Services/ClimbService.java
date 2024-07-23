@@ -6,6 +6,8 @@ import com.tufas.project.tufasgo.Repositories.ClimbRepository;
 import com.tufas.project.tufasgo.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -27,6 +29,7 @@ public class ClimbService {
         return repository.findById(id).get();
     }
 
+    @Transactional
     public Climb create(Climb climb) {
         return repository.save(climb);
     }
@@ -46,6 +49,7 @@ public class ClimbService {
         return true;
     }
 
+    @Transactional
     public Climb addUserToClimbLog(String climbId, Long userId, String area) {
         Optional<Climb> climbOptional = repository.findById(climbId);
         Optional<User> userOptional = userRepository.findById(userId);

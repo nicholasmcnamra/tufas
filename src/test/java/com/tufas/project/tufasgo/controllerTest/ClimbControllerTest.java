@@ -42,7 +42,6 @@ public class ClimbControllerTest {
     private CustomUserDetailsService customUserDetailsService;
 
     @Test
-    @WithMockUser(roles = "USER")
     public void createClimbAddUserTest() throws Exception {
         Climb climb = new Climb();
         climb.setClimbId("45rjfw-84ndf-19shf-72fbe");

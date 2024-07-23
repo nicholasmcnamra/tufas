@@ -62,7 +62,7 @@ public class ClimbController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{climbId}/addUserClimb/{userId}")
-    @PreAuthorize("isAuthenticated")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<User>> addUserToClimbLog(@PathVariable String climbId, @PathVariable Long userId, @RequestBody ClimbRequestArea area) {
         try {
             Climb climb = service.addUserToClimbLog(climbId, userId, area.getArea());
