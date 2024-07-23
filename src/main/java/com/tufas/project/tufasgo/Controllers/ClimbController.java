@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,23 +70,22 @@ public class ClimbController {
             return new ResponseEntity<>(climb.getClimbLog(), HttpStatus.OK);
         }
         catch (RuntimeException e) {
+            System.out.println("Runtime Exception");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch (Exception e) {
+            System.out.println("Server error");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @CrossOrigin("http://localhost:3000")
     @PostMapping("/climbs/createAndAddUser")
-    @PreAuthorize("isAuthenticated()")
     @Transactional
-    public ResponseEntity<List<User>> addClimbAndUser(@RequestBody ClimbRequestWithUserId request) {
+    public ResponseEntity<Climb> addClimbAndUser(@RequestBody ClimbRequestWithUserId request) {
         try {
-            Climb newClimb = service.create(request.getClimb());
-            Climb climbLog = service.addUserToClimbLog(request.getClimb().getClimbId(), request.getUserId(), request.getClimb().getArea());
-            System.out.println(request);
-            return new ResponseEntity<>(climbLog.getClimbLog(), HttpStatus.OK);
+            Climb climb = service.addClimbAndUser(request);
+            return new ResponseEntity<>(climb, HttpStatus.OK);
         }
         catch (RuntimeException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,11 +1,13 @@
 package com.tufas.project.tufasgo.Services;
 
 import com.tufas.project.tufasgo.Entities.Climb;
+import com.tufas.project.tufasgo.Entities.ClimbRequestWithUserId;
 import com.tufas.project.tufasgo.Entities.User;
 import com.tufas.project.tufasgo.Repositories.ClimbRepository;
 import com.tufas.project.tufasgo.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +16,7 @@ import java.util.Optional;
 @Service
 public class ClimbService {
     private ClimbRepository repository;
-    private UserRepository userRepository;;
+    private UserRepository userRepository;
     @Autowired
     public ClimbService(ClimbRepository repository, UserRepository userRepository) {
         this.repository = repository;
@@ -29,7 +31,6 @@ public class ClimbService {
         return repository.findById(id).get();
     }
 
-    @Transactional
     public Climb create(Climb climb) {
         return repository.save(climb);
     }
@@ -49,7 +50,6 @@ public class ClimbService {
         return true;
     }
 
-    @Transactional
     public Climb addUserToClimbLog(String climbId, Long userId, String area) {
         Optional<Climb> climbOptional = repository.findById(climbId);
         Optional<User> userOptional = userRepository.findById(userId);
@@ -64,5 +64,11 @@ public class ClimbService {
         else {
             throw new RuntimeException("Climb or User cannot be found.");
         }
+    }
+    @Transactional
+    public Climb addClimbAndUser(ClimbRequestWithUserId request) {
+       Climb climb = create(request.getClimb());
+        addUserToClimbLog(request.getClimb().getClimbId(), request.getUserId(), request.getClimb().getArea());
+        return climb;
     }
 }

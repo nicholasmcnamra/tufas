@@ -2,6 +2,7 @@ package com.tufas.project.tufasgo.controllerTest;
 
 import com.tufas.project.tufasgo.Controllers.ClimbController;
 import com.tufas.project.tufasgo.Entities.Climb;
+import com.tufas.project.tufasgo.Entities.ClimbRequestWithUserId;
 import com.tufas.project.tufasgo.Entities.User;
 import com.tufas.project.tufasgo.Repositories.UserRepository;
 import com.tufas.project.tufasgo.Security.CustomUserDetailsService;
@@ -49,8 +50,7 @@ public class ClimbControllerTest {
         List<User> userList = new ArrayList<>();
         climb.setClimbLog(userList);
 
-        when(climbService.create(any(Climb.class))).thenReturn(climb);
-        when(climbService.addUserToClimbLog(anyString(), anyLong(), anyString())).thenReturn(climb);
+        when(climbService.addClimbAndUser(any(ClimbRequestWithUserId.class))).thenReturn(climb);
 
         mockMvc.perform(post("/api/climbs/createAndAddUser")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -69,7 +69,6 @@ public class ClimbControllerTest {
                         + "},"
                         + "\"userId\": 1"
                         + "}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(userList.size()));
+                .andExpect(status().isOk());
     }
 }
