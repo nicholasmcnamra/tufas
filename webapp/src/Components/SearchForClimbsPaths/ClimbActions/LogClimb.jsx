@@ -19,8 +19,8 @@ const LogClimbButton = ( {generalArea, specificArea, climb} ) => {
     }
 
     try {
-        setUserId(userData.userId);
         await CreateClimb(generalArea, specificArea, climb);
+        setUserId(userData.userId);
         console.log(`userId: ${userId}\nclimbId: ${climbId}\narea: ${area}`);
         await LogClimbByUser(userId, climbId, area);
     }

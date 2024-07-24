@@ -49,7 +49,7 @@ public class ClimbService {
         repository.deleteById(id);
         return true;
     }
-
+    @Transactional
     public Climb addUserToClimbLog(String climbId, Long userId, String area) {
         Optional<Climb> climbOptional = repository.findById(climbId);
         Optional<User> userOptional = userRepository.findById(userId);
@@ -64,11 +64,5 @@ public class ClimbService {
         else {
             throw new RuntimeException("Climb or User cannot be found.");
         }
-    }
-    @Transactional
-    public Climb addClimbAndUser(ClimbRequestWithUserId request) {
-       Climb climb = create(request.getClimb());
-        addUserToClimbLog(request.getClimb().getClimbId(), request.getUserId(), request.getClimb().getArea());
-        return climb;
     }
 }

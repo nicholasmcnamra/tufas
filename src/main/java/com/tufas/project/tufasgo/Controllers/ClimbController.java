@@ -64,9 +64,11 @@ public class ClimbController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{climbId}/addUserClimb/{userId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<User>> addUserToClimbLog(@PathVariable String climbId, @PathVariable Long userId, @RequestBody ClimbRequestArea area) {
+    @Transactional
+    public ResponseEntity<List<User>> addUserToClimbLog(@PathVariable String climbId, @PathVariable Long userId, @RequestBody Climb climb) {
+        Climb newClimb = service.create(climb);
         try {
-            Climb climb = service.addUserToClimbLog(climbId, userId, area.getArea());
+            Climb newClimbLog = service.addUserToClimbLog(climbId, userId, climb.getArea());
             return new ResponseEntity<>(climb.getClimbLog(), HttpStatus.OK);
         }
         catch (RuntimeException e) {
@@ -78,22 +80,4 @@ public class ClimbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @CrossOrigin("http://localhost:3000")
-    @PostMapping("/climbs/createAndAddUser")
-    @Transactional
-    public ResponseEntity<Climb> addClimbAndUser(@RequestBody ClimbRequestWithUserId request) {
-        try {
-            Climb climb = service.addClimbAndUser(request);
-            return new ResponseEntity<>(climb, HttpStatus.OK);
-        }
-        catch (RuntimeException exception) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        catch (Exception exception) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-
 }

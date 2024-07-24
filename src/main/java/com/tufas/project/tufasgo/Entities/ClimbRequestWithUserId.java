@@ -2,11 +2,11 @@ package com.tufas.project.tufasgo.Entities;
 
 public class ClimbRequestWithUserId {
     private Climb climb;
-    private Long userId;
+    private User user;
 
-    public ClimbRequestWithUserId(Climb climb, Long userId) {
+    public ClimbRequestWithUserId(Climb climb, User user) {
         this.climb = climb;
-        this.userId = userId;
+        this.user = user;
     }
 
     public Climb getClimb() {
@@ -15,10 +15,10 @@ public class ClimbRequestWithUserId {
     public void setClimb(Climb climb) {
         this.climb = climb;
     }
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
