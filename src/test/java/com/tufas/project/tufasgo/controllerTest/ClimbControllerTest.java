@@ -50,12 +50,13 @@ public class ClimbControllerTest {
         List<User> userList = new ArrayList<>();
         climb.setClimbLog(userList);
 
-        when(climbService.addClimbAndUser(any(ClimbRequestWithUserId.class))).thenReturn(climb);
+        User user = new User();
 
-        mockMvc.perform(post("/api/climbs/createAndAddUser")
+        when(climbService.addUserToClimbLog(climb.getClimbId(), user.getUserId(), climb.getAreaName())).thenReturn(climb);
+
+        mockMvc.perform(post("/api/45rjfw-84ndf-19shf-72fbe/addUserClimb/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{"
-                        + "\"climb\": {"
                         + "\"climbId\": \"45rjfw-84ndf-19shf-72fbe\","
                         + "\"climbName\": \"Test Climb\","
                         + "\"area\": \"Test Area\","
@@ -66,8 +67,6 @@ public class ClimbControllerTest {
                         + "\"climbGrade\": \"5.10\","
                         + "\"latitude\": 45.0,"
                         + "\"longitude\": -123.0"
-                        + "},"
-                        + "\"userId\": 1"
                         + "}"))
                 .andExpect(status().isOk());
     }
