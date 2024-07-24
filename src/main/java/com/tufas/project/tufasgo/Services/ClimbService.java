@@ -1,8 +1,10 @@
 package com.tufas.project.tufasgo.Services;
 
 import com.tufas.project.tufasgo.Entities.Climb;
+import com.tufas.project.tufasgo.Entities.ClimbLog;
 import com.tufas.project.tufasgo.Entities.ClimbRequestWithUserId;
 import com.tufas.project.tufasgo.Entities.User;
+import com.tufas.project.tufasgo.Repositories.ClimbLogRepository;
 import com.tufas.project.tufasgo.Repositories.ClimbRepository;
 import com.tufas.project.tufasgo.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,12 @@ import java.util.Optional;
 public class ClimbService {
     private ClimbRepository repository;
     private UserRepository userRepository;
+    private ClimbLogRepository climbLogRepository;
     @Autowired
-    public ClimbService(ClimbRepository repository, UserRepository userRepository) {
+    public ClimbService(ClimbRepository repository, UserRepository userRepository, ClimbLogRepository climbLogRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
+        this.climbLogRepository = climbLogRepository;
     }
 
     public Iterable<Climb> index() {
@@ -31,8 +35,11 @@ public class ClimbService {
         return repository.findById(id).get();
     }
 
+    @Transactional
     public Climb create(Climb climb) {
-        return repository.save(climb);
+        Climb newClimb = repository.save(climb);
+        repository.flush();
+        return newClimb;
     }
 
     public Climb update(String id, Climb newClimbData) {
@@ -50,16 +57,16 @@ public class ClimbService {
         return true;
     }
     @Transactional
-    public Climb addUserToClimbLog(String climbId, Long userId, String area) {
+    public ClimbLog addUserToClimbLog(String climbId, Long userId, String area) {
         Optional<Climb> climbOptional = repository.findById(climbId);
         Optional<User> userOptional = userRepository.findById(userId);
 
         if (climbOptional.isPresent() && userOptional.isPresent()) {
             Climb climbToLog = climbOptional.get();
             User userLoggingClimb = userOptional.get();
-            climbToLog.getClimbLog().add(userLoggingClimb);
-            repository.save(climbToLog);
-            return climbToLog;
+            ClimbLog climbLog = new ClimbLog(area, climbToLog, userLoggingClimb);
+            climbLogRepository.save(climbLog);
+            return climbLog;
         }
         else {
             throw new RuntimeException("Climb or User cannot be found.");

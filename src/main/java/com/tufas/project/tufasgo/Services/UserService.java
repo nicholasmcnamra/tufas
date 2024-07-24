@@ -37,7 +37,6 @@ public class UserService {
         originalUser.setPassword(newUserData.getPassword());
         originalUser.setEmail(newUserData.getEmail());
         originalUser.setLastLogin(newUserData.getLastLogin());
-        originalUser.setUserClimbs(newUserData.getUserClimbs());
         return repository.save(originalUser);
     }
 

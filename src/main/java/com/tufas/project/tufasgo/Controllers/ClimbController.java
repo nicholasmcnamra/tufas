@@ -1,7 +1,7 @@
 package com.tufas.project.tufasgo.Controllers;
 
 import com.tufas.project.tufasgo.Entities.Climb;
-import com.tufas.project.tufasgo.Entities.ClimbRequestArea;
+import com.tufas.project.tufasgo.Entities.ClimbLog;
 import com.tufas.project.tufasgo.Entities.ClimbRequestWithUserId;
 import com.tufas.project.tufasgo.Entities.User;
 import com.tufas.project.tufasgo.Services.ClimbService;
@@ -65,14 +65,16 @@ public class ClimbController {
     @PostMapping("/{climbId}/addUserClimb/{userId}")
     @PreAuthorize("isAuthenticated()")
     @Transactional
-    public ResponseEntity<List<User>> addUserToClimbLog(@PathVariable String climbId, @PathVariable Long userId, @RequestBody Climb climb) {
-        Climb newClimb = service.create(climb);
+    public ResponseEntity<ClimbLog> addUserToClimbLog(@PathVariable String climbId, @PathVariable Long userId, @RequestBody Climb climb) {
         try {
-            Climb newClimbLog = service.addUserToClimbLog(climbId, userId, climb.getArea());
-            return new ResponseEntity<>(climb.getClimbLog(), HttpStatus.OK);
+            Climb newClimb = service.create(climb);
+            System.out.print("Climb added to climb table: " + newClimb);
+            ClimbLog newClimbLog = service.addUserToClimbLog(climbId, userId, climb.getArea());
+            System.out.println("ClimbLog added: " + newClimbLog);
+            return new ResponseEntity<>(newClimbLog, HttpStatus.OK);
         }
         catch (RuntimeException e) {
-            System.out.println("Runtime Exception");
+            System.out.println(climb.getAreaName());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch (Exception e) {

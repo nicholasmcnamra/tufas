@@ -2,6 +2,7 @@ package com.tufas.project.tufasgo.controllerTest;
 
 import com.tufas.project.tufasgo.Controllers.ClimbController;
 import com.tufas.project.tufasgo.Entities.Climb;
+import com.tufas.project.tufasgo.Entities.ClimbLog;
 import com.tufas.project.tufasgo.Entities.ClimbRequestWithUserId;
 import com.tufas.project.tufasgo.Entities.User;
 import com.tufas.project.tufasgo.Repositories.UserRepository;
@@ -46,13 +47,12 @@ public class ClimbControllerTest {
     public void createClimbAddUserTest() throws Exception {
         Climb climb = new Climb();
         climb.setClimbId("45rjfw-84ndf-19shf-72fbe");
-
-        List<User> userList = new ArrayList<>();
-        climb.setClimbLog(userList);
-
         User user = new User();
+        ClimbLog climblog = new ClimbLog(climb.getArea(), climb, user);
 
-        when(climbService.addUserToClimbLog(climb.getClimbId(), user.getUserId(), climb.getAreaName())).thenReturn(climb);
+
+
+        when(climbService.addUserToClimbLog(climb.getClimbId(), user.getUserId(), climb.getArea())).thenReturn(climblog);
 
         mockMvc.perform(post("/api/45rjfw-84ndf-19shf-72fbe/addUserClimb/1")
                 .contentType(MediaType.APPLICATION_JSON)
