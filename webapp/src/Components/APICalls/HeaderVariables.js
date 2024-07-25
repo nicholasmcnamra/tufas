@@ -18,3 +18,14 @@ export const headerWithoutAuthentication = (body, method) => {
         }
     )
 };
+
+export const headerWithoutBodyWithAuthentication = (method, token) => {
+    return (
+        {
+            mode: 'cors',
+            method: `${method}`,
+            headers: {'Content-Type':'application/json',
+                'Authorization' : token}
+        }
+    )
+};

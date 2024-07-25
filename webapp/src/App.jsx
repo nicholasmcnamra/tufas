@@ -7,10 +7,10 @@ import Search from './Components/SearchForClimbsPaths/Search';
 import AreaPage from './Components/SearchForClimbsPaths/AreaPage';
 import Footer from './Components/Footer';
 import Climbs from './Components/SearchForClimbsPaths/ClimbsPage';
-import UserClimbs from './UserClimbs';
 import TestAreaPage from './TestAreaPage';
 import Description from './Components/SearchForClimbsPaths/ClimbDescription';
 import UserContext, { UserProvider } from './Components/Authentication/UserContext';
+import UserClimbs from './Components/UserClimbs';
 
 
 function App() {

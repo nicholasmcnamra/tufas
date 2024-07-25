@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -71,5 +72,9 @@ public class ClimbService {
         else {
             throw new RuntimeException("Climb or User cannot be found.");
         }
+    }
+
+    public Iterable<ClimbLog> getUserClimbLog(User user) {
+        return climbLogRepository.findByUser(user);
     }
 }

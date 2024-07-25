@@ -21,9 +21,11 @@ import java.util.List;
 @RestController
 public class ClimbController {
     private ClimbService service;
+    private UserService userService;
 
-    public ClimbController(ClimbService service) {
+    public ClimbController(ClimbService service, UserService userService) {
         this.service = service;
+        this.userService = userService;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -81,5 +83,13 @@ public class ClimbController {
             System.out.println("Server error");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/climblog/{userId}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Iterable<ClimbLog>> getUserClimbs(@PathVariable Long userId) {
+        User user = userService.show(userId);
+        return new ResponseEntity<>(service.getUserClimbLog(user), HttpStatus.OK);
     }
 }
