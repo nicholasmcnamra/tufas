@@ -1,8 +1,14 @@
 import { createContext, useEffect, useState } from "react";
-import Login from "./Login";
-import { isAuthenticated } from "../APICalls/UserLogin";
 
 const UserContext = createContext();
+
+const isAuthenticated = () => {
+    const currentUser = sessionStorage.getItem('user');
+    if (!currentUser) {
+      return {}
+    }
+    return JSON.parse(currentUser);
+  }
 
 export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(undefined);

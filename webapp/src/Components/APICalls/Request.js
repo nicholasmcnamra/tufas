@@ -1,6 +1,6 @@
 import { headerWithoutAuthentication } from "./HeaderVariables";
 
-const FetchWithoutToken = async (body, method, endpoint) => {
+const Request = async (body, method, endpoint) => {
     let response;
     
     let requestHeader = headerWithoutAuthentication(body, method);
@@ -9,7 +9,7 @@ const FetchWithoutToken = async (body, method, endpoint) => {
         response = await fetch(`${endpoint}`, requestHeader);
 
         if (!response.ok) {
-            throw new Error("Trouble fetching response")
+            throw new Error("Network response not okay.")
         }
 
         const data = await response.json();
@@ -21,4 +21,4 @@ const FetchWithoutToken = async (body, method, endpoint) => {
     }
 }
 
-export default FetchWithoutToken;
+export default Request;

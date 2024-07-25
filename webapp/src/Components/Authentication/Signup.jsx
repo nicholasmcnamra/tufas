@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from '@mui/material';
-import FetchWithoutToken from "../APICalls/FetchWithoutToken";
+import Request from "../APICalls/Request";
 
 const SignUp = ( { setOpenSignUpModal } ) => {
     const [body, setBody] = useState({
@@ -35,7 +35,7 @@ const SignUp = ( { setOpenSignUpModal } ) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        FetchWithoutToken(body, 'POST', "http://localhost:8080/api/users");
+        Request(body, 'POST', "http://localhost:8080/api/users");
         setOpenSignUpModal(false);
     }
     return (

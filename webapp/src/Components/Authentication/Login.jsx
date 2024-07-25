@@ -4,21 +4,24 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { Grid, TextField, Button } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import UserLogin from '../APICalls/UserLogin';
+import Request from '../APICalls/Request';
 
 const Login= ({ setOpenLogInModal, setLoggedIn }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [body, setBody] = useState({
+    username: '',
+    password: ''
+  });
   const [visible, setVisible] = useState(false);
   const axios = require('axios').default;
+
 
   const handleChange = (e) => {
     switch(e.target.name) {
       case "username":
-        setUsername(e.target.value);
+        setBody({...body, username: e.target.value});
         break;
       case "password":
-        setPassword(e.target.value);
+        setBody({...body, password: e.target.value});
         break;
       default:
         break;
@@ -28,16 +31,16 @@ const Login= ({ setOpenLogInModal, setLoggedIn }) => {
   const handleFormSubmit = async(e) => {
     e.preventDefault();
 
-    if (!username || !password) {
+    if (!body.username || !body.password) {
       alert('Please fill in both fields.');
       return;
     }
     else {
-      let apiResult = await UserLogin(username, password);
+      let apiResult = await Request(body, 'POST', "http://localhost:8080/api/login");
       if (apiResult) {
-        console.log(username, password);
         setLoggedIn(true);
         setOpenLogInModal(false);
+        sessionStorage.setItem('user', JSON.stringify(apiResult));
         console.log(`Welcome back!`)
       }
       else {
@@ -67,7 +70,7 @@ const handleGoogleLogin = async () => {
             fullWidth
             label='Username'
             name='username'
-            value={username}
+            value={body.username}
             onChange={handleChange}
             />
             </Grid>
@@ -79,7 +82,7 @@ const handleGoogleLogin = async () => {
             label='Password'
             name='password'
             type={visible ? 'text' : 'password'}
-            value={password}
+            value={body.password}
             onChange={handleChange}
             ></TextField>
             <div className="password-visible" onClick={ () => setVisible(!visible)}>
