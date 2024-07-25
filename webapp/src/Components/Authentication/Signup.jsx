@@ -1,41 +1,42 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from '@mui/material';
 import CreateUser from "../APICalls/CreateUser";
+import FetchWithoutToken from "../APICalls/FetchWithoutToken";
 
 const SignUp = ( { setOpenSignUpModal } ) => {
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
-    const [email, setEmail] = useState();
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
+    const [body, setBody] = useState({
+        userName: '',
+        password: '',
+        email: '',
+        firstName: '',
+        lastName: ''
+    });
 
     const handleChange = (e) => {
         switch(e.target.name) {
             case "username":
-                setUsername(e.target.value);
+                setBody({...body, userName: e.target.value});
                 break;
             case "password":
-                setPassword(e.target.value);
+                setBody({...body, password: e.target.value});
                 break;
             case "email":
-                setEmail(e.target.value);
+                setBody({...body, email: e.target.value});
                 break;
             case "firstname":
-                setFirstName(e.target.value);
+                setBody({...body, firstName: e.target.value});
                 break;
             case "lastname":
-                setLastName(e.target.value);
+                setBody({...body, lastName: e.target.value});
                 break;
             default:
                 break;
     }
     }
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        CreateUser(username, password, email, firstName, lastName);
-        console.log( username, password, email )
+        FetchWithoutToken(body, 'POST', "http://localhost:8080/api/users");
         setOpenSignUpModal(false);
     }
     return (
@@ -48,7 +49,7 @@ const SignUp = ( { setOpenSignUpModal } ) => {
                         fullWidth
                         label="First Name"
                         name="firstname"
-                        value={firstName}
+                        value={body.firstName}
                         onChange={handleChange}
                         />
                     </Grid>
@@ -58,7 +59,7 @@ const SignUp = ( { setOpenSignUpModal } ) => {
                         fullWidth
                         label="Last Name"
                         name="lastname"
-                        value={lastName}
+                        value={body.lastName}
                         onChange={handleChange}
                         />
                     </Grid>
@@ -68,7 +69,7 @@ const SignUp = ( { setOpenSignUpModal } ) => {
                         fullWidth
                         label="E-mail"
                         name="email"
-                        value={email}
+                        value={body.email}
                         onChange={handleChange}
                         />
                     </Grid>
@@ -78,7 +79,7 @@ const SignUp = ( { setOpenSignUpModal } ) => {
                         fullWidth
                         label="Username"
                         name="username"
-                        value={username}
+                        value={body.userName}
                         onChange={handleChange}
                         />
                     </Grid>
@@ -89,7 +90,7 @@ const SignUp = ( { setOpenSignUpModal } ) => {
                         label="Password"
                         name="password"
                         type="password"
-                        value={password}
+                        value={body.password}
                         onChange={handleChange}
                         />
                     </Grid>
