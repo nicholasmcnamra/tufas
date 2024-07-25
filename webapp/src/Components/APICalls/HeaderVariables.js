@@ -1,8 +1,8 @@
-export const headerWithAuthentication = (token, body) => {
+export const headerWithAuthentication = (body, method, token) => {
     return (
     {
         mode: 'cors',
-        method: 'POST',
+        method: `${method}`,
         headers: {'Content-Type':'application/json',
                 'Authorization' : token},
         body: JSON.stringify(body)

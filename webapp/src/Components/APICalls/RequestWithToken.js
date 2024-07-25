@@ -4,7 +4,7 @@ const RequestWithToken = async (body, method, endpoint) => {
     let response;
     const userData = JSON.parse(sessionStorage.getItem('user'));
     const token = `Bearer ${userData.token}`;
-    let requestHeader = headerWithAuthentication(token, body);
+    let requestHeader = headerWithAuthentication(body, method, token);
     
     try {
     response = await fetch(`${endpoint}`, requestHeader);

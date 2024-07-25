@@ -1,28 +1,36 @@
-import CreateClimb from "../../APICalls/CreateClimb";
-import LogClimbByUser from "../../APICalls/LogClimb_By_User";
 import { useState } from "react";
+import RequestWithToken from "../../APICalls/RequestWithToken";
 
 const LogClimbButton = ( {generalArea, specificArea, climb} ) => {
     const userData = JSON.parse(sessionStorage.getItem('user'));
     const [userId, setUserId] = useState(''); 
-    const climbId = climb.id;
-    const area = generalArea.area_name;
+    const body = {
+        climbId: climb.id,
+        area: generalArea.area_name,
+        areaName: specificArea.area_name,
+        climbName: climb.name,
+        climbType: null,
+        climbDescription: null,
+        gradeType: null,
+        grade: climb.grades.vscale,
+        latitude: specificArea.metadata.lat,
+        longitude: specificArea.metadata.lng
+    };
 
     const handleLogClimbClick = async (e) => {
         e.preventDefault();
 
      console.log('Props received:', { generalArea, specificArea, climb });
-
+     setUserId(userData.userId);
     if (!climb || !generalArea || !specificArea) {
         console.log("One or more required props is missing.")
         return;
     }
 
     try {
-        await CreateClimb(generalArea, specificArea, climb);
-        setUserId(userData.userId);
-        console.log(`userId: ${userId}\nclimbId: ${climbId}\narea: ${area}`);
-        await LogClimbByUser(userId, climbId, area);
+
+        const logClimb = await RequestWithToken(body, 'POST', `http://localhost:8080/api/${body.climbId}/addUserClimb/${userId}`)
+        console.log(`userId: ${userId}\nclimbId: ${body.climbId}\narea: ${body.area}`);
     }
     catch (error) {
         console.log("Error logging climb ", error);
