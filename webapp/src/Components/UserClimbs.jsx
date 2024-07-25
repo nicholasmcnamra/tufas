@@ -4,7 +4,6 @@ import GetRequestWithToken from "./APICalls/GetRequestWithToken";
 
 const UserClimbs = () => {
     const [currentUser, setCurrentUser] = useState('');
-    const [userClimbs, setUserClimbs] = useState([]);
     const [climbData, setClimbData] = useState({});
 
     useEffect(async() => {
@@ -12,7 +11,6 @@ const UserClimbs = () => {
         setCurrentUser(userData.userId);
         
         setClimbData(await GetRequestWithToken('GET', `http://localhost:8080/api/climblog/${currentUser}`));
-        setUserClimbs(climbData);
         console.log(currentUser);
     }, []);
 
