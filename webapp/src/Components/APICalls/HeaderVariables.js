@@ -1,11 +1,11 @@
-export const headerWithAuthentication = (token, climbData) => {
+export const headerWithAuthentication = (token, body) => {
     return (
     {
         mode: 'cors',
         method: 'POST',
         headers: {'Content-Type':'application/json',
                 'Authorization' : token},
-        body: JSON.stringify(climbData)
+        body: JSON.stringify(body)
 })};
 
 export const headerWithoutAuthentication = (body, method) => {

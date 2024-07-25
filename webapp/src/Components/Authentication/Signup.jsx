@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from '@mui/material';
-import CreateUser from "../APICalls/CreateUser";
 import FetchWithoutToken from "../APICalls/FetchWithoutToken";
 
 const SignUp = ( { setOpenSignUpModal } ) => {
