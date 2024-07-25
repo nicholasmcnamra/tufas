@@ -4,7 +4,8 @@ import { React, useState, useEffect } from "react";
 import SignUp from "./Authentication/Signup";
 import TufasLogo from "./Mountain";
 import LoginModal from "./Authentication/LoginModal";
-import AccountMenu from "./APICalls/AccountMenu";
+import AccountMenu from "./AccountMenu";
+
 
 const Navbar = ({ loggedIn, setLoggedIn, onLogout, setOpenLogInModal, openLogInModal }) => {
     const [openSignUpModal, setOpenSignUpModal] = useState(false);
