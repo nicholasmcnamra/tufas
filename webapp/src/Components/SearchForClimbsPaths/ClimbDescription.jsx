@@ -3,7 +3,18 @@ import LogClimbButton from "./ClimbActions/LogClimb";
 
 const Description = ({ climbs, climbIndex, specificArea, generalArea }) => {
     const climbToDisplay = climbs[climbIndex];
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    const [userId, setUserId] = useState(null); 
     const componentRef = useRef(null);
+
+    useEffect(() => {
+        if (userData) {
+            setUserId(userData.userId);
+    } 
+    else {
+        console.warn("User is not logged in and userId is not available in session storage.")
+    }
+    }, []);
 
     useEffect(() => {
         if (componentRef.current) {
@@ -31,7 +42,7 @@ const Description = ({ climbs, climbIndex, specificArea, generalArea }) => {
                 <p className="protection">{climbToDisplay.content.protection}</p>
             </div>
                 <div className="button-container">
-                <LogClimbButton generalArea={generalArea} specificArea={specificArea} climb={climbToDisplay} />
+                {userId ? (<LogClimbButton generalArea={generalArea} specificArea={specificArea} climb={climbToDisplay} />) : (<></>)}
                 <button className="add-media">Add Media</button>
                 <button className="map">Map</button>
                 </div>

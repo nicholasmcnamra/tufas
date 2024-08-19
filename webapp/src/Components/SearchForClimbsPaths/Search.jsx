@@ -11,6 +11,7 @@ const Search = () => {
         setSearched(true);
         let apiResult = await FetchAPI(searchArea);
         setResult(apiResult);
+        console.log(apiResult);
       };
 
     return (
