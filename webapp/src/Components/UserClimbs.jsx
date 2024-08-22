@@ -3,6 +3,7 @@ import GetRequestWithToken from "./APICalls/GetRequestWithToken";
 
 const UserClimbs = () => {
     const [climbData, setClimbData] = useState();
+    const [isLoading, setIsLoading] = useState(true);
     let groupedData;
 
     useEffect(() => {
@@ -20,25 +21,28 @@ const UserClimbs = () => {
             }
             else {
                 console.error("Current user not found in session storage.");
+                setIsLoading(false);
             }
         }
 
         fetchUserClimbs();
     }, []);
 
-
-
-
     return (
         <div className="myclimbs-container">
-            {/* {climbData.map((climb, index) => (
-                <div className="climb-container">
+            {Array.isArray(climbData) && climbData.length > 0 ? (
+            climbData.map((climb) => (
+                <div className="climb-container" key={climb.climb.climbId}>
                     <h2 className="climb-area-name">{climb.area}</h2>
                     <h3 className="climb-name">{climb.climb.climbName}</h3>
                     <img src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672" alt="" className="map" />
                     
                 </div>
-            ))} */}
+            )
+            ))
+            :
+            <p className="no-user-climbs">No climbs found.</p>
+        }
             {console.log(climbData)}
         </div>
     )
