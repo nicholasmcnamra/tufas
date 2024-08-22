@@ -37,15 +37,16 @@ function App() {
 }, []);
 
 function handleLogOut(e) {
+  if (e){
   e.preventDefault();
   sessionStorage.removeItem('user');
   setLoggedIn(false);
-  history.push("/");
+  history.push("/");}
 } 
 
   return (
     <div className="App">
-    <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} onLogout={handleLogOut} openLogInModal={openLogInModal} setOpenLogInModal={setOpenLogInModal} />
+    <Navbar onLogout={handleLogOut} openLogInModal={openLogInModal} setOpenLogInModal={setOpenLogInModal} />
 
         <Switch>
         <Route exact path="/" component={withImage(Search)}></Route>
