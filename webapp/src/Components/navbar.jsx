@@ -1,7 +1,5 @@
-import Search from "./SearchForClimbsPaths/Search";
 import SignUpModal from "./Authentication/SignUpModal";
 import { React, useState, useEffect } from "react";
-import SignUp from "./Authentication/Signup";
 import TufasLogo from "./Mountain";
 import LoginModal from "./Authentication/LoginModal";
 import AccountMenu from "./AccountMenu";
@@ -10,6 +8,7 @@ import AccountMenu from "./AccountMenu";
 const Navbar = ({ onLogout, setOpenLogInModal, openLogInModal }) => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [openSignUpModal, setOpenSignUpModal] = useState(false);
+
     useEffect(() => {
         const storedLoggedInStatus = sessionStorage.getItem("loggedIn");
         if (storedLoggedInStatus === "true") {
