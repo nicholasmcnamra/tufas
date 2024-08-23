@@ -29,7 +29,6 @@ L.Icon.Default.mergeOptions({
 const UserClimbs = () => {
     const [climbData, setClimbData] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    let groupedData;
 
     useEffect(() => {
         let userData = JSON.parse(sessionStorage.getItem('user'));
