@@ -1,5 +1,30 @@
 import { useEffect, useState } from "react";
 import GetRequestWithToken from "./APICalls/GetRequestWithToken";
+import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import { Marker, Popup } from "react-leaflet";
+import L from 'leaflet';  // Import Leaflet for marker icons if needed
+import 'leaflet/dist/leaflet.css';  // Ensure the CSS is imported
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+const customIcon = new L.Icon({
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon2x,
+    shadowUrl: markerShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});
 
 const UserClimbs = () => {
     const [climbData, setClimbData] = useState();
@@ -35,7 +60,19 @@ const UserClimbs = () => {
                 <div className="climb-container" key={climb.climb.climbId}>
                     <h2 className="climb-area-name">{climb.area}</h2>
                     <h3 className="climb-name">{climb.climb.climbName}</h3>
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672" alt="" className="map" />
+                    <MapContainer
+                            className="map"
+                            center={[climb.climb.latitude, climb.climb.longitude]}
+                            zoom={13}
+                            scrollWheelZoom={false}
+                            key={`map-${climb.climb.climbId}`}
+                        >
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <Marker position={[climb.climb.latitude, climb.climb.longitude]} icon={customIcon}/>
+                        </MapContainer>
                     
                 </div>
             )
