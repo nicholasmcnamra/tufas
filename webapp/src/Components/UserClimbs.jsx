@@ -55,7 +55,7 @@ const UserClimbs = () => {
             {Array.isArray(climbData) && climbData.length > 0 ? (
             climbData.map((climb) => (
                 <div className="climb-container" key={climb.climb.climbId}>
-                    <h2 className="climb-area-name">{climb.area}</h2>
+                    <h2 className="climb-area-name">{climb.area.replace(/[^\w ]/, '')}</h2>
                     <h3 className="climb-name">{climb.climb.climbName}</h3>
                     <MapContainer
                             className="map"
