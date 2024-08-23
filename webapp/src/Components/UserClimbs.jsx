@@ -28,7 +28,6 @@ L.Icon.Default.mergeOptions({
 
 const UserClimbs = () => {
     const [climbData, setClimbData] = useState();
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         let userData = JSON.parse(sessionStorage.getItem('user'));
@@ -45,7 +44,6 @@ const UserClimbs = () => {
             }
             else {
                 console.error("Current user not found in session storage.");
-                setIsLoading(false);
             }
         }
 
