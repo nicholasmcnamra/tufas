@@ -1,169 +1,5 @@
-
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Urbanist:ital,wght@0,100..900;1,100..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
-
-/* base styles */
-* {
-  margin: 0;
-  font-family: "Urbanist";
-}
-/* NAVBAR STYLING */
-.navbar {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  max-width: 2000px;
-  margin: 0 auto;
-  border-bottom: 5px solid #caa512d0;
-}
-.navbar h1 {
-  color: #000000;
-}
-.navbar .links {
-  margin-left: auto;
-}
-.navbar a {
-  margin-left: 16px;
-  text-decoration: none;
-  padding: 10px;
-  color: #333;
-}
-.navbar a:hover {
-  color: #caa512d0;
-}
-
-/* CLIMB AREA STYLING */
-.areaitem:hover {
-  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
-}
-
-.area-preview button{
-  background-color: #caa512d0; /* Green background */
-  border: 7px solid #ffffff; /* Green border */
-  color: white; /* White text */
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  width: 70%; /* Set a width if needed */
-  font-size: xx-large;
-  display: inline-block; /* Make the buttons appear below each other */
-  border-radius:20px;
-}
-
-.area-preview {
-  padding: 10px;
-}
-
-/* CLIMB STYLING */
-.climbitem:hover {
-  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
-}
-
-.climb-preview {
-  display: flex;
-  padding: 50px;
-  flex-wrap: wrap; /* Allow buttons to wrap into multiple lines */
-  justify-content: space-between; /* Align buttons to the right */
-}
-
-.climb-preview button {
-  background-color: #07565d;
-  border: 3px solid #ffffff;
-  color: white;
-  padding: 15px 24px;
-  cursor: pointer;
-  font-size: large;
-  border-radius: 12px;
-  width: 250px; /* Set a fixed width for each button */
-  margin: 5px; /* Add margin for spacing between buttons */
-}
-
-/* Container for climb preview buttons */
-.climb-preview-container {
-  text-align: center; /* Center the content horizontally */
-}
-
-/* Box to contain climb preview buttons */
-.climb-preview-box {
-  background-color: #ffffff; /* Light gray background */
-  padding: 20px; /* Padding around the box */
-  border-radius: 20px; /* Rounded corners */
-  margin: 20px auto; /* Center the box horizontally */
-/* Limit the width of the box */
-  display: flex; /* Use flexbox */
-  flex-wrap: wrap; /* Allow content to wrap */
-  justify-content: center; /* Center content horizontally */
-}
-
-
 /*DESCRIPTION STYLING*/
-.button-container button:hover {
-  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
-}
 
-.description-container {
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
-
-.grade  {
-  padding-bottom: 10px;
-}
-.climb-preview-box p {
-  padding: 10px;
-}
-
-.desc, .prot{
-  font-size: 24px;;
-}
-.description-preview-box {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  text-align: left;
-  width: 65%;
-}
-.climb-to-display-name {
-  color: rgb(0, 0, 0);
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-.grade, .protection {
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: #666;
-}
-.climb-to-display-description {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #444;
-}
-.button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 30%;
-  padding-left: 20px;
-}
-.button-container button {
-  background-color: #222d2e;
-  border: 3px solid #ffffff;
-  color: white;
-  padding: 15px 24px;
-  width: 100%;
-  cursor: pointer;
-  font-size: large;
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
-  .description-preview-box,
-  .button-container {
-    width: 100%;
-  }
-}
 
 /*LOGIN STYLING*/
 .login {
@@ -279,9 +115,9 @@
 }
 
 .image-container img {
-  width: 100vw; /* 100% of viewport width */
-  height: 100vh; /* 100% of viewport height */
-  object-fit: cover; /* Maintain aspect ratio while covering container */
+  width: 100vw; 
+  height: 100vh; 
+  object-fit: cover; 
 }
 
 
@@ -295,7 +131,7 @@
   left: 50%; /* Center horizontally within image-container */
   transform: translateX(-50%); /* Center the search bar horizontally */
   z-index: 1; /* Ensure the search bar is above other content */
-  text-align: center; /* Center align text */
+  text-align: center; 
 }
 
 @media (max-width: 768px) {
@@ -308,22 +144,22 @@
   min-width: 30vw; 
   max-width: 40vw;
   width: 30vw;
-  padding: 2vh; /* Increase padding for larger size */
+  padding: 2vh; 
   border: 1px solid #000000;
-  border-radius: 8px; /* Increase border radius for rounded corners */
-  font-size: 18px; /* Increase font size */
-  outline: none; /* Remove outline */
+  border-radius: 8px; 
+  font-size: 18px; 
+  outline: none; 
 }
 
 .search button {
-  width: 15vw; /* Adjust width relative to viewport width */
+  width: 15vw; 
   padding: 2vh;
   background-color: #07565d;
   color: white;
   border: 1px solid #000000;
-  border-radius: 8px; /* Increase border radius for rounded corners */
+  border-radius: 8px; 
   cursor: pointer;
-  font-size: 18px; /* Increase font size */
+  font-size: 18px; 
   margin-left: 10px;
 }
 

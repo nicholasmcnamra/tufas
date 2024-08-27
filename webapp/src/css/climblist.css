@@ -1,0 +1,39 @@
+.climbitem:hover {
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .climb-preview {
+    display: flex;
+    padding: 50px;
+    flex-wrap: wrap; /* Allow buttons to wrap into multiple lines */
+    justify-content: space-between; /* Align buttons to the right */
+  }
+  
+  .climb-preview button {
+    background-color: #07565d;
+    border: 3px solid #ffffff;
+    color: white;
+    padding: 15px 24px;
+    cursor: pointer;
+    font-size: large;
+    border-radius: 12px;
+    width: 250px; 
+    margin: 5px; 
+  }
+  
+  /* Container for climb preview buttons */
+  .climb-preview-container {
+    text-align: center; 
+  }
+  
+  /* Box to contain climb preview buttons */
+  .climb-preview-box {
+    background-color: #ffffff; 
+    padding: 20px; 
+    border-radius: 20px;
+    margin: 20px auto;
+  /* Limit the width of the box */
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+  }

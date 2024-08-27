@@ -43,8 +43,8 @@ const Description = ({ climbs, climbIndex, specificArea, generalArea }) => {
             </div>
                 <div className="button-container">
                 {userId ? (<LogClimbButton generalArea={generalArea} specificArea={specificArea} climb={climbToDisplay} />) : (<></>)}
-                <button className="add-media">Add Media</button>
-                <button className="map">Map</button>
+                <button >Add Media</button>
+                <button >Map</button>
                 </div>
             </div>
     )
