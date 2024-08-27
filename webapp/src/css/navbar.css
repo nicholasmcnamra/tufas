@@ -21,3 +21,23 @@
   .navbar a:hover {
     color: #caa512d0;
   }
+
+  .account-menu-button {
+    position: absolute;
+    margin-right: 50px;
+    right: 0;
+  }
+
+  .tufaslogo {
+    position: relative;
+    margin-right: 30px;
+    font-weight: bold;
+    font-size: xx-large;
+  }
+  
+  .mo {
+    position: relative;
+    height: 10vh;
+    width: 10vh;
+    
+  }

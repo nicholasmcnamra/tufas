@@ -50,6 +50,10 @@ const UserClimbs = () => {
         fetchUserClimbs();
     }, []);
 
+    const removeClimb = () => {
+        //send DELETE request to server
+    };
+
     return (
         <div className="myclimbs-container">
             {Array.isArray(climbData) && climbData.length > 0 ? (
@@ -70,7 +74,7 @@ const UserClimbs = () => {
                             />
                             <Marker position={[climb.climb.latitude, climb.climb.longitude]} icon={customIcon}/>
                         </MapContainer>
-                    
+                    <button className="remove">Remove Climb</button>
                 </div>
             )
             ))

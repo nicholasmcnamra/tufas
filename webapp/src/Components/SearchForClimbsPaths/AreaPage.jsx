@@ -18,7 +18,11 @@ const AreaPage = ({ result }) => {
     useEffect(() => {
         if(result) {
             try {
-                setAreas(result.data.areas[0].children);
+
+                const filteredAreas = result.data.areas[0].children.filter(area => 
+                    area.climbs && area.climbs.length > 0
+                );
+                setAreas(filteredAreas);
                 setClimbLogAreas(result.data.areas[0]);
             }
             catch(error) {
@@ -32,9 +36,10 @@ const AreaPage = ({ result }) => {
     }
 
     const handleClick = async (buttonIndex) => {
+        //
         try {
-            setClimbs(result.data.areas[0].children[buttonIndex].climbs);
-            setSpecificArea(result.data.areas[0].children[buttonIndex]);
+            setClimbs(areas[buttonIndex].climbs);
+            setSpecificArea(areas[buttonIndex]);
         } catch (error) {
             setError(error);
         }
@@ -53,3 +58,5 @@ const AreaPage = ({ result }) => {
 };
 
 export default AreaPage;
+
+//
