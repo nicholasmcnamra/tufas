@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Climbs from "./ClimbsPage";
+import FetchAPI from "../APICalls/openbetaapi";
 
 const states = [
     "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
@@ -20,6 +21,7 @@ const AreaPage = ({ result }) => {
     const [error, setError] = useState(null);
     const [climbs, setClimbs] = useState([]);
     const componentRef = useRef(null);
+    const [searchAreaIsState, setSearchAreaIsState] = useState(false);
 
     useEffect(() => {
         if (componentRef.current) {
@@ -32,6 +34,7 @@ const AreaPage = ({ result }) => {
             try {
                 if (states.includes(result.data.areas[0].area_name)) {
                     setAreas(result.data.areas[0].children);
+                    setSearchAreaIsState(true);
                 }
                 else {
                 const filteredAreas = result.data.areas[0].children.filter(area => 
@@ -54,8 +57,15 @@ const AreaPage = ({ result }) => {
     const handleClick = async (buttonIndex) => {
         //
         try {
+            if (searchAreaIsState) {
+                const stateAreaResult = await FetchAPI(areas[buttonIndex].area_name)
+                // setAreas(stateAreaResult);
+                console.log(stateAreaResult);
+            }
+            else {
             setClimbs(areas[buttonIndex].climbs);
             setSpecificArea(areas[buttonIndex]);
+            }
         } catch (error) {
             setError(error);
         }
