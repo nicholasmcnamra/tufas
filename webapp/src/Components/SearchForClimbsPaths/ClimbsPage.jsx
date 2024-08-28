@@ -32,8 +32,6 @@ const Climbs = ({ climbs, specificArea, generalArea }) => {
             console.log(buttonIndex);
     }
 
-    console.log(climbs, climbIndex);
-
     return (
         <div className="climb-preview-box" ref={componentRef}>
             {climbs.map((climb, index) => (
